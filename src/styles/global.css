@@ -289,6 +289,11 @@ ul {
     }
 }
 
+.logo{
+    width: 50px;
+}
+
+
 .loading {
     width: 6rem;
     height: 6rem;
