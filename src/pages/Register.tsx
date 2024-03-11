@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Logo, FormRow } from '../components/'
-import Wrapper from '../assets/wrappers/RegisterPage.jsx'
+import Wrapper from '../styles/wrappers/RegisterPage.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { loginUser, registerUser } from '../store/features/user/userSlice.jsx'
+import { loginUser, registerUser } from '../store/features/user/userSlice.ts'
+import {useAppSelector, useAppDispatch} from '../store/hooks.ts'
+
+
+
 
 /* Component State Template */
 const initialState = {
@@ -17,11 +20,11 @@ const initialState = {
 function Register () {
 
   /* Dispatch Reducer Action */
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   /* Router Navigation */
   const navigate = useNavigate()
   /* Select User Slice Context */
-  const { isLoading, user } = useSelector(store => store.user)
+  const { isLoading, user } = useAppSelector(store => store.user)
   /* Component State  */
   const [values, setValues] = useState(initialState)
 

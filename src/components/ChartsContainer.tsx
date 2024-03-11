@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import BarChart from './BarChart.jsx'
-import AreaChart from './AreaChart.jsx'
+import BarChart from './BarChart.tsx'
+import AreaChart from './AreaChart.tsx'
 import { useSelector } from 'react-redux'
-import Wrapper from '../styles/wrappers/ChartsContainer.jsx'
+import Wrapper from '../styles/wrappers/ChartsContainer.tsx'
 
 function ChartsContainer () {
 

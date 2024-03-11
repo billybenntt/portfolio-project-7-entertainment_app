@@ -1,37 +1,38 @@
-import main from '../assets/images/main.svg'
 import Wrapper from '../styles/wrappers/LandingPage.jsx'
-import { Logo } from '../components'
-import { Link } from 'react-router-dom'
+import {Logo} from '../components'
+import {Link} from 'react-router-dom'
+import {ImageHero} from '../assets/images'
 
-function Landing () {
-  return (
-    <Wrapper>
-      {/*  LOGO HEADER*/}
-      <nav>
-        <Logo/>
-      </nav>
 
-      {/*  MAIN CONTAINER */}
-      <div className="container page">
-        {/* Info */}
-        <div className="info">
-          <h1> Job <span>Tracking</span> App</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio eaque eius eos
-            exercitationem fugiat iste, maxime minima mollitia numquam praesentium quia quis quisquam saepe
-            sint ullam veniam voluptatem.</p>
+function Landing() {
+    return (
+        <Wrapper>
+            {/*  LOGO HEADER*/}
+            <nav>
+                <Logo/>
+            </nav>
 
-          {/* Button */}
-          <Link to="/register" className="btn btn-hero">
-            Login/Register
-          </Link>
+            {/*  MAIN CONTAINER */}
+            <div className="container page">
+                {/* Info */}
+                <div className="info">
+                    <h1> Job <span>Tracking</span> App</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio eaque eius eos
+                        exercitationem fugiat iste, maxime minima mollitia numquam praesentium quia quis quisquam saepe
+                        sint ullam veniam voluptatem.</p>
 
-        </div>
-        {/* Image  */}
-        <img src={main} alt="main image" className="img main-img"/>
-      </div>
+                    {/* Button */}
+                    <Link to="/register" className="btn btn-hero">
+                        Login/Register
+                    </Link>
 
-    </Wrapper>
-  )
+                </div>
+                {/* Image  */}
+                <img src={ImageHero} alt="main image" className="img main-img"/>
+            </div>
+
+        </Wrapper>
+    )
 }
 
 export default Landing

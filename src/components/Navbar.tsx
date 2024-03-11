@@ -1,76 +1,77 @@
 import Wrapper from '../styles/wrappers/Navbar.jsx'
-import { useDispatch, useSelector } from 'react-redux'
-import { toggleSidebar, clearStore } from '../store/features/user/userSlice.jsx'
-import { Logo } from '../components'
-import { useEffect, useState } from 'react'
-
-function Navbar () {
-
-  // STATE MANAGEMENT
-  const dispatch = useDispatch()
-  const [showLogout, setShowLogout] = useState(false)
-  const { user } = useSelector(store => store.user)
-
-  // EVENT HANDLERS
-  const handleSidebarToggle = () => {
-    dispatch(toggleSidebar())
-  }
-
-  const handleLogoutToggle = () => {
-    setShowLogout(!showLogout)
-  }
-
-  const handleLogout = () => {
-    dispatch(clearStore('Logged out'))
-  }
+import {toggleSidebar, clearStore} from '../store/features/user/userSlice.ts'
+import {Logo} from '../components'
+import {useState} from 'react'
+import {useAppSelector, useAppDispatch} from '../store/hooks.ts';
+import {IconCollapse, IconUser, IconArrowDown} from '../assets/icons'
 
 
+function Navbar() {
 
-  // CONDITIONAL RENDERING
-  const isLogoutActive = showLogout ? 'dropdown show-dropdown' : 'dropdown'
+    // STATE MANAGEMENT
+    const dispatch = useAppDispatch()
+    const [showLogout, setShowLogout] = useState(false)
+    const {user, isSidebarOpen} = useAppSelector(store => store.user)
 
-  return (
-    <Wrapper>
-      <div className="nav-center">
+    // EVENT HANDLERS
+    const handleSidebarToggle = () => {
+        dispatch(toggleSidebar())
+    }
 
-        {/*TOGGLE BUTTON*/}
-        <button
-          type="button"
-          className="toggle-btn"
-          onClick={handleSidebarToggle}>
-          <FaAlignLeft/>
-        </button>
+    const handleLogoutToggle = () => {
+        setShowLogout(!showLogout)
+    }
 
-        {/*  TEXT */}
-        <div>
-          <Logo/>
-          <h3 className="logo-text">Dashboard</h3>
-        </div>
+    const handleLogout = () => {
+        dispatch(clearStore('Logged out'))
+    }
 
-        {/*  LOGIN CONTAINER*/}
-        <div className="btn-container">
-          <button
-            onClick={handleLogoutToggle}
-            className="btn">
-            <FaUserCircle/>
-            {user?.name}
-            <FaCaretDown/>
-          </button>
 
-          {/* Logout Dropdown */}
-          <div className={isLogoutActive}>
-            <button
-              type="button"
-              className="dropdown-btn"
-              onClick={handleLogout}>
-              logout
-            </button>
-          </div>
-        </div>
+    // CONDITIONAL RENDERING
+    const isLogoutActive = showLogout ? 'dropdown show-dropdown' : 'dropdown'
 
-      </div>
-    </Wrapper>
-  )
+    return (
+        <Wrapper>
+            <div className="nav-center">
+
+                {/*TOGGLE BUTTON*/}
+                <button
+                    type="button"
+                    className="toggle-btn"
+                    onClick={handleSidebarToggle}>
+                    <IconCollapse/>
+                </button>
+
+                {/*  TEXT */}
+                <div>
+                    <Logo/>
+                    <h3 className="logo-text">Dashboard</h3>
+                </div>
+
+                {/*  LOGIN CONTAINER*/}
+                <div className="btn-container">
+                    <button
+                        onClick={handleLogoutToggle}
+                        className="btn">
+                        <IconUser/>
+                        {user?.name}
+                        <IconArrowDown/>
+                    </button>
+
+                    {/* Logout Dropdown */}
+                    <div className={isLogoutActive}>
+                        <button
+                            type="button"
+                            className="dropdown-btn"
+                            onClick={handleLogout}>
+                            logout
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </Wrapper>
+    )
 }
 
 export default Navbar

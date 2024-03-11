@@ -1,6 +1,6 @@
 import * as React from "react"
 
-function IconArrowRight(props: React.SVGProps<SVGSVGElement>) {
+function IconCollapse(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -12,13 +12,12 @@ function IconArrowRight(props: React.SVGProps<SVGSVGElement>) {
             strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="lucide lucide-circle-arrow-right"
             {...props}
         >
-            <circle cx={12} cy={12} r={10}/>
-            <path d="M8 12h8M12 16l4-4-4-4"/>
+            <rect width={18} height={18} x={3} y={3} rx={2}/>
+            <path d="M15 3v18M10 15l-3-3 3-3"/>
         </svg>
     )
 }
 
-export default IconArrowRight
+export default IconCollapse

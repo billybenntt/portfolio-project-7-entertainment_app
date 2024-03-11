@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import { FormRow } from '../../components/'
-import Wrapper from '../../assets/wrappers/DashboardFormPage.jsx'
-import { useDispatch, useSelector } from 'react-redux'
+import Wrapper from '../../styles/wrappers/DashboardFormPage.tsx'
 import { toast } from 'react-toastify'
-import { updateUser } from '../../store/features/user/userSlice.jsx'
-function Profile () {
+import { updateUser } from '../../store/features/user/userSlice.ts'
+import {useAppSelector, useAppDispatch} from '../../store/hooks.ts';
+
+
+function ProfilePage () {
+
 
   // GLOBAL STATE
-  const { isLoading, user } = useSelector(store => store.user)
-  const dispatch = useDispatch()
+  const { isLoading, user } = useAppSelector(store => store.user)
+  const dispatch = useAppDispatch()
 
   // COMPONENT STATE
   const [userData, setUserData] = useState({
@@ -57,4 +60,4 @@ function Profile () {
   )
 }
 
-export default Profile
+export default ProfilePage

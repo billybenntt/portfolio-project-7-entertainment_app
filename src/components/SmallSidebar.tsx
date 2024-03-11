@@ -1,8 +1,8 @@
 import { Logo, NavLinks } from '../components'
-import { useDispatch, useSelector } from 'react-redux'
-import Wrapper from '../styles/wrappers/SmallSidebar.jsx'
-import { toggleSidebar } from '../store/features/user/userSlice.jsx'
-
+import Wrapper from '../styles/wrappers/SmallSidebar.tsx'
+import { toggleSidebar } from '../store/features/user/userSlice.ts'
+import {IconClose} from '../assets/icons'
+import {useAppSelector, useAppDispatch} from '../store/hooks.ts';
 
 
 
@@ -10,8 +10,8 @@ import { toggleSidebar } from '../store/features/user/userSlice.jsx'
 /* Hidden on Large Screen Sizes*/
 function SmallSideBar () {
 
-  const dispatch = useDispatch()
-  const { isSidebarOpen } = useSelector(store => store.user)
+  const dispatch = useAppDispatch()
+  const { isSidebarOpen } = useAppSelector(store => store.user)
 
   // EVENT HANDLER - CLOSE SIDEBAR
   function handleToggleSidebar () {
@@ -29,7 +29,7 @@ function SmallSideBar () {
           {/*CLOSE BUTTON */}
           <button className="close-btn"
             onClick={handleToggleSidebar}>
-            <FaTimes/>
+            <IconClose/>
           </button>
           {/*HEADER */}
           <header>

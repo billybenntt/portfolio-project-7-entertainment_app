@@ -1,4 +1,4 @@
-import Wrapper from '../styles/wrappers/JobInfo.jsx'
+import Wrapper from '../styles/wrappers/JobInfo.tsx'
 
 function JobInfo (props) {
 

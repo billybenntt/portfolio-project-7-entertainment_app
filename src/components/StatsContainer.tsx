@@ -1,50 +1,47 @@
-import StatItem from './StatItem.jsx'
-import Wrapper from '../styles/wrappers/StatsContainer.jsx'
+import StatItem from './StatItem.tsx'
+import Wrapper from '../styles/wrappers/StatsContainer.tsx'
 import {useAppSelector} from '../store/hooks.ts';
-import {IconArrowRight} from '../assets/icons'
+import {IconPending, IconScheduled, IconDeclined} from '../assets/icons'
 
 
-function StatsContainer () {
+function StatsContainer() {
 
-  const { stats } = useAppSelector(store => store.allJobs)
-  const { interview, pending, declined } = stats
+    const {stats} = useAppSelector(store => store.allJobs)
+    const {interview, pending, declined} = stats
 
-  const defaultStats = [
-    {
-      title: 'Pending Applications',
-      count: pending || 0,
-      icon: <IconArrowRight/>,
-      color: '#e9b949',
-      bcg: '#fcefc7'
-    },
-    {
-      title: 'Interviews Scheduled',
-      count: interview || 0,
-      icon: <IconArrowRight/>,
-      color: '#647acb',
-      bcg: '#e0e8f9'
-    }, {
-      title: 'Jobs Declined',
-      count: declined || 0,
-      icon: <IconArrowRight/>,
-      color: '#d66a6a',
-      bcg: '#ffeeee'
-    }
-  ]
+    const defaultStats = [
+        {
+            title: 'Pending Applications',
+            count: pending || 0,
+            icon: <IconPending/>,
+            color: '#e9b949',
+        },
+        {
+            title: 'Interviews Scheduled',
+            count: interview || 0,
+            icon: <IconScheduled/>,
+            color: '#647acb',
+        }, {
+            title: 'Jobs Declined',
+            count: declined || 0,
+            icon: <IconDeclined/>,
+            color: '#d66a6a',
+        }
+    ]
 
-  const statList = defaultStats.map(((item, index) => {
+    const statList = defaultStats.map(((item, index) => {
+        return (
+            <StatItem key={index} {...item}/>
+        )
+    }))
+
     return (
-      <StatItem key={index} {...item}/>
+        <Wrapper>
+            <>
+                {statList}
+            </>
+        </Wrapper>
     )
-  }))
-
-  return (
-    <Wrapper>
-      <>
-        {statList}
-      </>
-    </Wrapper>
-  )
 }
 
 export default StatsContainer

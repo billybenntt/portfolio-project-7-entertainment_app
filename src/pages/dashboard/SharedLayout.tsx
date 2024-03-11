@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import Wrapper from '../../assets/wrappers/SharedLayout.jsx'
+import Wrapper from '../../styles/wrappers/SharedLayout.tsx'
 import { BigSideBar, Navbar, SmallSideBar } from '../../components'
 
 // DASHBOARD PAGE 
@@ -15,7 +15,7 @@ function SharedLayout () {
         <div className="dashboard-content">
           <Navbar/>
 
-          {/*UNIQUE PAGES */}
+          {/*DYNAMIC PAGES */}
           <div className="dashboard-page">
             <Outlet/>
           </div>

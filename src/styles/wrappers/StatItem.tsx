@@ -32,13 +32,14 @@ const Wrapper = styled.article`
         height: 60px;
         background: ${(props) => props.color};
         border-radius: var(--borderRadius);
+        
         display: flex;
         align-items: center;
         justify-content: center;
 
         svg {
             font-size: 2rem;
-            color: ${(props) => props.color};
+            color: #ffffff;
         }
     }
 `

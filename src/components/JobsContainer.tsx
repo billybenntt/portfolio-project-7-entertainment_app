@@ -1,14 +1,14 @@
-import Job from './Job.jsx'
+import Job from './Job.tsx'
 import { useEffect } from 'react'
-import Loading from './Loading.jsx'
-import { useDispatch, useSelector } from 'react-redux'
-import Wrapper from '../styles/wrappers/JobsContainer.jsx'
-import { getAllJobs } from '../store/features/allJobs/allJobsSlice.jsx'
-import PageBtnContainer from './PageBtnContainer.jsx'
+import Loading from './Loading.tsx'
+import Wrapper from '../styles/wrappers/JobsContainer.tsx'
+import { getAllJobs } from '../store/features/allJobs/allJobsSlice.ts'
+import Pagination from './Pagination.tsx'
+import {useAppSelector, useAppDispatch} from '../store/hooks.ts';
 
 function JobsContainer () {
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const {
     isLoading,
@@ -20,7 +20,7 @@ function JobsContainer () {
     searchStatus,
     searchType,
     sort,
-  } = useSelector(store => store.allJobs)
+  } = useAppSelector(store => store.allJobs)
 
   const hasJobs = jobs.length === 0
 
@@ -62,7 +62,7 @@ function JobsContainer () {
       <div className="jobs">
         {jobsList}
       </div>
-      {numOfPages > 1 && <PageBtnContainer/>}
+      {numOfPages > 1 && <Pagination/>}
     </Wrapper>
   )
 }

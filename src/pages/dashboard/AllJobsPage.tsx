@@ -1,5 +1,5 @@
 import { SearchContainer, JobsContainer } from '../../components'
-function AllJobs () {
+function AllJobsPage () {
 
   return (
     <>
@@ -9,4 +9,4 @@ function AllJobs () {
   )
 }
 
-export default AllJobs
+export default AllJobsPage

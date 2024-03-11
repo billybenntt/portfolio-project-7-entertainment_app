@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Landing, Error, Register, ProtectedRoute } from './pages'
-import { SharedLayout, AddJob, Stats, Profile, AllJobs } from './pages/dashboard'
+import { SharedLayout, AddJobPage, StatsPage, ProfilePage, AllJobsPage } from './pages/dashboard'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-function App(props) {
+function App() {
 
   return (
     <BrowserRouter>
@@ -18,10 +18,10 @@ function App(props) {
           </ProtectedRoute>}>
 
           {/*ROUTE 1 - NESTED SUB ROUTES*/}
-          <Route index element={<Stats />} />
-          <Route path="/all-jobs" element={<AllJobs />} />
-          <Route path="/add-job" element={<AddJob />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route index element={<StatsPage />} />
+          <Route path="/all-jobs" element={<AllJobsPage />} />
+          <Route path="/add-job" element={<AddJobPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
 
         </Route>
 

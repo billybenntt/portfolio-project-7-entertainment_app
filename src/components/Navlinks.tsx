@@ -1,4 +1,4 @@
-import links from '../utils/links.jsx'
+import links from '../utils/links.tsx'
 import { NavLink } from 'react-router-dom'
 
 function NavLinks ({ toggleSidebar }) {

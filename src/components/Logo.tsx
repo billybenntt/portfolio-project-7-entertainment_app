@@ -1,9 +1,9 @@
-import img from '../assets/images/logo.svg'
+import {ImageLogo} from '../assets/images';
 
-function Logo () {
-  return (
-    <img src={img} alt="logo jobster" className="logo"/>
-  )
+function Logo() {
+    return (
+        <img src={ImageLogo} alt="logo image" className="logo"/>
+    )
 }
 
 export default Logo

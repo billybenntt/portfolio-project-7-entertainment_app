@@ -1,7 +1,7 @@
-import AddJob from './AddJob.jsx'
-import AllJobs from './AllJobs.jsx'
-import Profile from './Profile.jsx'
-import Stats from './Stats.jsx'
+import AllJobsPage from './AllJobsPage.tsx'
+import AddJobPage from './AddJobPage.tsx'
+import ProfilePage from './ProfilePage.tsx'
+import StatsPage from './StatsPage.tsx'
 import SharedLayout from './SharedLayout.jsx'
 
-export { AddJob, AllJobs, Profile, Stats, SharedLayout }
+export {AllJobsPage, ProfilePage, StatsPage, SharedLayout, AddJobPage}
