@@ -1,12 +1,12 @@
-function Loading (props) {
+function Loading(props: { center: boolean }) {
 
-  const { center } = props
-  const isCenter = center ? 'loading loading-center' : 'loading'
+    const {center} = props
+    const isCenter = center ? 'loading loading-center' : 'loading'
 
-  return (
-    <div className={isCenter}>
-    </div>
-  )
+    return (
+        <div className={isCenter}>
+        </div>
+    )
 }
 
 export default Loading

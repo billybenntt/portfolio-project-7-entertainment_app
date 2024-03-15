@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
-import {showStats} from '../../store/features/allJobs/allJobsSlice.ts'
-import {Loading, StatsContainer, ChartsContainer} from '../../components'
-import {useAppSelector, useAppDispatch} from '../../store/hooks.ts';
+import {showStats} from '@/store/features/allJobs/allJobsSlice.ts'
+import {Loading, StatsContainer, ChartsContainer} from '@/components'
+import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
 
 
 function StatsPage() {
@@ -13,13 +13,13 @@ function StatsPage() {
     // EFFECT - LOAD DATA
     useEffect(() => {
         dispatch(showStats())
-    }, [])
+    }, [dispatch])
 
 
     // LOADING RETURN
     if (isLoading) {
         return (
-            <Loading/>
+            <Loading center={true}/>
         )
     }
 

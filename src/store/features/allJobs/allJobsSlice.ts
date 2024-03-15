@@ -1,6 +1,7 @@
 import {toast} from 'react-toastify'
-import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit'
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {getAllJobsThunk, showStatsThunk} from './allJobsThunk.ts'
+import {ReduxStore} from "@/store/store.ts";
 
 
 const initialFilterState = {
@@ -28,15 +29,15 @@ const initialState = {
 
 
 const getAllJobs = createAsyncThunk('allJobs/getJobs',
-    async (_, thunkAPI: any) => {
-
-        return getAllJobsThunk(_, thunkAPI)
+    async (_, thunkAPI) => {
+        return getAllJobsThunk(_, thunkAPI as ReduxStore)
     }
 )
 
 const showStats = createAsyncThunk('allJobs/showStats',
     async (_, thunkAPI) => {
-        return showStatsThunk('jobs/stats', thunkAPI)
+
+        return showStatsThunk('jobs/stats', thunkAPI as ReduxStore)
     })
 
 const allJobsSlice = createSlice({
@@ -50,7 +51,6 @@ const allJobsSlice = createSlice({
             state.isLoading = false
         },
         handleChange: (state, action) => {
-
             const {inputName, inputValue} = action.payload
             state.page = 1
             state[inputName] = inputValue
@@ -79,7 +79,8 @@ const allJobsSlice = createSlice({
             })
             .addCase(getAllJobs.rejected, (state, action) => {
                 state.isLoading = false
-                toast.error(action.payload)
+                const message = action.payload as string
+                toast.error(message)
             })
             .addCase(showStats.pending, (state) => {
                 state.isLoading = true
@@ -90,9 +91,10 @@ const allJobsSlice = createSlice({
                 state.stats = defaultStats
                 state.monthlyApplications = monthlyApplications
             })
-            .addCase(showStats.rejected, (state, {payload}) => {
+            .addCase(showStats.rejected, (state, action) => {
                 state.isLoading = false
-                toast.error(payload)
+                const message = action.payload as string
+                toast.error(message)
             });
     }
 
@@ -102,7 +104,6 @@ export {getAllJobs, showStats}
 export default allJobsSlice.reducer
 export const {
     showLoading,
-    hideLoading,
     handleChange,
     clearFilters,
     changePage,

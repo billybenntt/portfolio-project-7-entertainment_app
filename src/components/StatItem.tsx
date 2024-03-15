@@ -1,6 +1,16 @@
 import Wrapper from '@/styles/wrappers/StatItem.jsx'
+import React from "react";
 
-function StatItem(props) {
+
+interface StatItemProps {
+    count: number,
+    title: string,
+    icon: React.ReactElement,
+    color: string
+}
+
+
+function StatItem(props: StatItemProps) {
 
     const {count, title, icon, color} = props
 

@@ -1,11 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import {toast} from 'react-toastify'
-import {
-    addUserToLocalStorage,
-    getUserFromLocalStorage,
-    removeUserFromLocalStorage
-} from '../../../utils/localStorage.ts'
 import {loginUserThunk, registerUserThunk, updateUserThunk, clearStoreThunk} from './userThunk.ts'
+import {addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage} from '@/utils/localStorage.ts'
 
 // User Slice Local State
 const initialState = {
@@ -16,19 +12,19 @@ const initialState = {
 
 // New User Thunk
 const registerUser = createAsyncThunk('user/registerUser',
-    async (userPayload, thunkAPI) => {
+    async (userPayload: object, thunkAPI) => {
         return registerUserThunk('auth/registerUser', userPayload, thunkAPI)
     })
 
 // Login User Thunk
 const loginUser = createAsyncThunk('user/loginUser',
-    async (userPayload, thunkAPI) => {
+    async (userPayload: object, thunkAPI) => {
         return loginUserThunk('auth/login', userPayload, thunkAPI)
     })
 
 // Update User Thunk
 const updateUser = createAsyncThunk('user/updateUser',
-    async (userPayload, thunkAPI) => {
+    async (userPayload: object, thunkAPI) => {
         /* Get Token From Local State */
         return updateUserThunk('/auth/updateUser', userPayload, thunkAPI)
     })
@@ -65,8 +61,9 @@ const userSlice = createSlice({
                 toast.success(`User updated`)
                 state.isLoading = false
             })
-            .addCase(updateUser.rejected, (state, {payload}) => {
-                toast.error(payload)
+            .addCase(updateUser.rejected, (state, action) => {
+                const message = action.payload as string
+                toast.error(message)
                 state.isLoading = false
             })
             .addCase(registerUser.pending, (state) => {

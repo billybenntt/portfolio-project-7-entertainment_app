@@ -1,6 +1,6 @@
-import dataFetch from '../../../utils/axios/dataFetch.ts'
+import dataFetch from '@/utils/axios/dataFetch.ts'
 import {checkBadResponse} from '../user/userThunk.ts'
-import {RootState, ReduxStore} from "../../store.ts";
+import {RootState, ReduxStore} from "@/store/store.ts";
 
 
 export const getAllJobsThunk = async (_: void, thunkAPI: ReduxStore) => {

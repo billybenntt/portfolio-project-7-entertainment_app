@@ -1,9 +1,9 @@
-import Wrapper from '../styles/wrappers/Navbar.jsx'
-import {toggleSidebar, clearStore} from '../store/features/user/userSlice.ts'
-import {Logo} from '../components'
+import Wrapper from '@/styles/wrappers/Navbar.jsx'
+import {toggleSidebar, clearStore} from '@/store/features/user/userSlice.ts'
+import {Logo} from '@/components'
 import {useState} from 'react'
-import {useAppSelector, useAppDispatch} from '../store/hooks.ts';
-import {IconCollapse, IconUser, IconArrowDown} from '../assets/icons'
+import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
+import {IconCollapse, IconUser, IconArrowDown} from '@/assets/icons'
 
 
 function Navbar() {

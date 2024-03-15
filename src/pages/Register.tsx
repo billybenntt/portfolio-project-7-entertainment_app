@@ -17,13 +17,9 @@ const initialState = {
 
 function Register() {
 
-    /* Dispatch Reducer Action */
     const dispatch = useAppDispatch()
-    /* Router Navigation */
     const navigate = useNavigate()
-    /* Select User Slice Context */
     const {isLoading, user} = useAppSelector(store => store.user)
-    /* Component State  */
     const [values, setValues] = useState(initialState)
 
     // EFFECT - NAVIGATE TO DASHBOARD
@@ -52,7 +48,7 @@ function Register() {
             toast.warning('Input all the fields')
             return
         }
-        /* Member Action , Dispatch Login*/
+        /* Member Action, Dispatch Login*/
         if (isMember) {
             dispatch(loginUser({email, password}))
             return

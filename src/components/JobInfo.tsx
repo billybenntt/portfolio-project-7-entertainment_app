@@ -1,6 +1,7 @@
 import Wrapper from '@/styles/wrappers/JobInfo.tsx'
+import React from "react";
 
-function JobInfo(props: { icon: string, text: string }) {
+function JobInfo(props: { text: string, icon: React.ReactElement }) {
 
     const {icon, text} = props
 

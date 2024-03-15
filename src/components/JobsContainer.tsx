@@ -1,10 +1,9 @@
-import Job from './Job.tsx'
 import { useEffect } from 'react'
-import Loading from './Loading.tsx'
-import Wrapper from '../styles/wrappers/JobsContainer.tsx'
-import { getAllJobs } from '../store/features/allJobs/allJobsSlice.ts'
-import Pagination from './Pagination.tsx'
-import {useAppSelector, useAppDispatch} from '../store/hooks.ts';
+import {Loading, Pagination, Job} from '@/components'
+import Wrapper from '@/styles/wrappers/JobsContainer.tsx'
+import { getAllJobs } from '@/store/features/allJobs/allJobsSlice.ts'
+import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
+import {JobType} from "@/types/app";
 
 function JobsContainer () {
 
@@ -27,7 +26,7 @@ function JobsContainer () {
   // EFFECT - LOAD ALL ITEMS
   useEffect(() => {
     dispatch(getAllJobs())
-  }, [page, search, searchStatus, sort, searchType])
+  }, [page, search, searchStatus, sort, searchType, dispatch])
 
   // LOADING RETURN
   if (isLoading) {
@@ -47,7 +46,7 @@ function JobsContainer () {
     )
   }
 
-  const jobsList = jobs.map((item) => {
+  const jobsList = jobs.map((item: JobType) => {
     const { _id: id } = item
 
     return (

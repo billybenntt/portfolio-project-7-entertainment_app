@@ -4,7 +4,7 @@ import React from "react";
 //  BASE TYPES
 export interface JobType {
     _id: string
-    company: number,
+    company: string,
     position: string,
     status: string,
     jobType: string,

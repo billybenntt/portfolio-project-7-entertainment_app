@@ -1,8 +1,8 @@
 import {FormRowSelect, FormRow} from './index.jsx'
-import Wrapper from '../styles/wrappers/DashboardFormPage.tsx'
-import {handleChange, clearFilters} from '../store/features/allJobs/allJobsSlice.ts'
-import {useAppDispatch, useAppSelector} from '../store/hooks.ts';
-import {SubmitFormEvent, UpdateFormEvent} from "../types/app";
+import Wrapper from '@/styles/wrappers/DashboardFormPage.tsx'
+import {handleChange, clearFilters} from '@/store/features/allJobs/allJobsSlice.ts'
+import {useAppDispatch, useAppSelector} from '@/store/hooks.ts';
+import {SubmitFormEvent, UpdateFormEvent} from "@/types/app";
 
 function SearchContainer() {
 
@@ -19,11 +19,8 @@ function SearchContainer() {
     const handleSearch = (e: UpdateFormEvent) => {
         const inputName = e.target.name
         const inputValue = e.target.value
-
-        if (isLoading) return
-
+        // if (isLoading) return
         dispatch(handleChange({inputName, inputValue}))
-
     }
 
     return (

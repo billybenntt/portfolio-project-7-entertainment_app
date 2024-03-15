@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
-import Wrapper from '../styles/wrappers/ErrorPage.jsx'
-import {ImageNotFound} from '../assets/images'
+import Wrapper from '@/styles/wrappers/ErrorPage.jsx'
+import {ImageNotFound} from '@/assets/images'
 
 
 function Error() {

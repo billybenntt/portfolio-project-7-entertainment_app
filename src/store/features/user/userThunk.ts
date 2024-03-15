@@ -1,31 +1,32 @@
-import dataFetch from '../../../utils/axios/dataFetch.ts'
-import {clearStore, logoutUser} from './userSlice.ts'
-import {clearAllJobsState} from '../allJobs/allJobsSlice.ts'
-import {clearValues} from '../job/jobSlice.ts'
+import dataFetch from '@/utils/axios/dataFetch.ts'
+import {clearStore, logoutUser} from '@/store/features/user/userSlice.ts'
+import {clearAllJobsState} from '@/store/features/allJobs/allJobsSlice.ts'
+import {clearValues} from '@/store/features/job/jobSlice.ts'
 
-export const registerUserThunk = async (url, userPayload, thunkAPI) => {
+
+export const registerUserThunk = async (url: string, userPayload: object, thunkAPI: any) => {
     try {
         const {data} = await dataFetch.post(url, userPayload)
         /* Return Successful Promise */
         return data
-    } catch (error) {
+    } catch (error: any) {
         const {response: {data: {msg}}} = error
         return thunkAPI.rejectWithValue(msg)
     }
 
 }
 
-export const loginUserThunk = async (url, userPayload, thunkAPI) => {
+export const loginUserThunk = async (url: string, userPayload: object, thunkAPI: any) => {
     try {
         const {data} = await dataFetch.post(url, userPayload)
         return data
-    } catch (error) {
+    } catch (error: any) {
         const {response: {data: {msg}}} = error
         return thunkAPI.rejectWithValue(msg)
     }
 }
 
-export const updateUserThunk = async (url, userPayload, thunkAPI) => {
+export const updateUserThunk = async (url: string, userPayload: object, thunkAPI: any) => {
     try {
         const {data} = await dataFetch.patch(url, userPayload)
 
@@ -36,7 +37,7 @@ export const updateUserThunk = async (url, userPayload, thunkAPI) => {
 }
 
 // CLEAR STORE THUNK
-export const clearStoreThunk = async (message, thunkAPI) => {
+export const clearStoreThunk = async (message: string, thunkAPI: any) => {
     try {
         /* Clear Add jobs State */
         thunkAPI.dispatch(clearValues())
@@ -51,7 +52,7 @@ export const clearStoreThunk = async (message, thunkAPI) => {
     }
 }
 
-export const checkBadResponse = async (error, thunkAPI) => {
+export const checkBadResponse = async (error: any, thunkAPI: any) => {
     const {response: {data: {msg}, status}} = error
     if (status === 401) {
         thunkAPI.dispatch(clearStore)

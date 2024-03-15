@@ -1,7 +1,7 @@
-import Wrapper from '../styles/wrappers/LandingPage.jsx'
-import {Logo} from '../components'
+import Wrapper from '@/styles/wrappers/LandingPage.jsx'
+import {Logo} from '@/components'
 import {Link} from 'react-router-dom'
-import {ImageHero} from '../assets/images'
+import {ImageHero} from '@/assets/images'
 
 
 function Landing() {

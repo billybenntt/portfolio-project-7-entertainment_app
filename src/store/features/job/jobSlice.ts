@@ -1,7 +1,8 @@
 import {toast} from 'react-toastify'
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {getUserFromLocalStorage} from '../../../utils/localStorage.ts'
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {getUserFromLocalStorage} from '@/utils/localStorage.ts'
 import {createJobThunk, deleteJobThunk, editJobThunk} from './jobThunk.ts'
+
 
 const initialState = {
     isLoading: false,
@@ -16,20 +17,26 @@ const initialState = {
     editJobID: ''
 }
 
+
+type updateState = {
+    inputName: string
+    inputValue: string
+}
+
 const createJob = createAsyncThunk('job/CreateJob',
-    async (jobPayload, thunkAPI) => {
+    async (jobPayload: object, thunkAPI) => {
         return createJobThunk('jobs', jobPayload, thunkAPI)
     }
 )
 
 const deleteJob = createAsyncThunk('allJobs/deleteJob',
-    async (jobId, thunkAPI) => {
+    async (jobId: string, thunkAPI) => {
         return deleteJobThunk(`jobs/${jobId}`, thunkAPI)
     }
 )
 
 const editJob = createAsyncThunk('job/editJob',
-    async (editPayload, thunkAPI) => {
+    async (editPayload: object, thunkAPI) => {
         return editJobThunk('jobs', editPayload, thunkAPI)
     }
 )
@@ -44,10 +51,11 @@ const jobSlice = createSlice({
             /* This payload  overrides the existing state*/
             return {...state, ...payload, isEditing: true,}
         },
-        handleChange: (state, action) => {
+        handleChange: (state, action: PayloadAction<updateState>) => {
             const {payload} = action
             const {inputName, inputValue} = payload
             state[inputName] = inputValue
+
         },
         clearValues: () => {
             const {location} = getUserFromLocalStorage()
@@ -64,16 +72,19 @@ const jobSlice = createSlice({
                 state.isLoading = false
                 toast.success('Job Created')
             })
-            .addCase(createJob.rejected, (state, {payload}) => {
+            .addCase(createJob.rejected, (state, action) => {
                 state.isLoading = false
-                toast.error(payload)
+                const message = action.payload as string
+                toast.error(message)
             })
-            .addCase(deleteJob.fulfilled, (_, {payload}) => {
-                const {msg} = payload
+            .addCase(deleteJob.fulfilled, (_, action) => {
+                const {msg} = action.payload
                 toast.success(msg)
             })
-            .addCase(deleteJob.rejected, (_, {payload}) => {
-                toast.error(payload)
+            .addCase(deleteJob.rejected, (_, action) => {
+                console.log(action)
+                const message = action.payload as string
+                toast.error(message)
             })
             .addCase(editJob.pending, (state) => {
                 state.isLoading = true
@@ -81,9 +92,10 @@ const jobSlice = createSlice({
             .addCase(editJob.fulfilled, () => {
                 toast.success('Job Modified...')
             })
-            .addCase(editJob.rejected, (state, {payload}) => {
+            .addCase(editJob.rejected, (state, action) => {
                 state.isLoading = false
-                toast.error(payload)
+                const message = action.payload as string
+                toast.error(message)
             })
     }
 

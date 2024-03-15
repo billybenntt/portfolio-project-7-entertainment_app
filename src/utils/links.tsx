@@ -1,4 +1,4 @@
-import {IconStats, IconAllData, IconAddData, IconUserProfile} from '../assets/icons';
+import {IconStats, IconAllData, IconAddData, IconUserProfile} from '@/assets/icons';
 
 const links = [
     {

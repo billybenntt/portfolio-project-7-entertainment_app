@@ -1,7 +1,7 @@
-import {changePage} from '../store/features/allJobs/allJobsSlice.ts'
-import Wrapper from '../styles/wrappers/PageBtnContainer.tsx'
-import {useAppSelector, useAppDispatch} from '../store/hooks.ts';
-import {IconArrowLeft, IconArrowRight} from '../assets/icons'
+import {changePage} from '@/store/features/allJobs/allJobsSlice.ts'
+import Wrapper from '@/styles/wrappers/PageBtnContainer.tsx'
+import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
+import {IconArrowLeft, IconArrowRight} from '@/assets/icons'
 
 function Pagination() {
 
