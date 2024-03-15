@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { getUserFromLocalStorage } from '../localStorage.ts'
 
-const fetchData = axios.create({
+const dataFetch = axios.create({
   baseURL: 'https://jobify-prod.herokuapp.com/api/v1/toolkit',
 })
 
-fetchData.interceptors.request.use((request) => {
+dataFetch.interceptors.request.use((request) => {
   const user = getUserFromLocalStorage()
   /* If User Exist Modify request with Token */
   if (user) {
@@ -17,6 +17,6 @@ fetchData.interceptors.request.use((request) => {
   return Promise.reject(error)
 })
 
-export default fetchData
+export default dataFetch
 
 

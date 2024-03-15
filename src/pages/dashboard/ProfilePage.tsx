@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { FormRow } from '../../components/'
-import Wrapper from '../../styles/wrappers/DashboardFormPage.tsx'
+import { FormRow } from '@/components/'
+import Wrapper from '@/styles/wrappers/DashboardFormPage.tsx'
 import { toast } from 'react-toastify'
-import { updateUser } from '../../store/features/user/userSlice.ts'
-import {useAppSelector, useAppDispatch} from '../../store/hooks.ts';
+import { updateUser } from '@/store/features/user/userSlice.ts'
+import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
 
 
 function ProfilePage () {

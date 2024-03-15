@@ -1,4 +1,4 @@
-import { SearchContainer, JobsContainer } from '../../components'
+import { SearchContainer, JobsContainer } from '@/components'
 function AllJobsPage () {
 
   return (

@@ -11,7 +11,7 @@ function Navbar() {
     // STATE MANAGEMENT
     const dispatch = useAppDispatch()
     const [showLogout, setShowLogout] = useState(false)
-    const {user, isSidebarOpen} = useAppSelector(store => store.user)
+    const {user} = useAppSelector(store => store.user)
 
     // EVENT HANDLERS
     const handleSidebarToggle = () => {

@@ -1,6 +1,7 @@
 import {toast} from 'react-toastify'
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit'
 import {getAllJobsThunk, showStatsThunk} from './allJobsThunk.ts'
+
 
 const initialFilterState = {
     search: '',
@@ -16,13 +17,19 @@ const initialState = {
     totalJobs: 0,
     numOfPages: 1,
     page: 1,
-    stats: {},
+    stats: {
+        interview: 0,
+        pending: 0,
+        declined: 0
+    },
     monthlyApplications: [],
     ...initialFilterState
 }
 
+
 const getAllJobs = createAsyncThunk('allJobs/getJobs',
-    async (_, thunkAPI) => {
+    async (_, thunkAPI: any) => {
+
         return getAllJobsThunk(_, thunkAPI)
     }
 )
@@ -42,18 +49,19 @@ const allJobsSlice = createSlice({
         hideLoading: (state) => {
             state.isLoading = false
         },
-        handleChange: (state, {payload}) => {
-            const {inputName, inputValue} = payload
+        handleChange: (state, action) => {
+
+            const {inputName, inputValue} = action.payload
             state.page = 1
             state[inputName] = inputValue
         },
         clearFilters: (state) => {
             return {...state, ...initialFilterState, page: 1}
         },
-        changePage: (state, {payload}) => {
-            state.page = payload
+        changePage: (state, action) => {
+            state.page = action.payload
         },
-        clearAllJobsState: (state) => {
+        clearAllJobsState: () => {
             return initialState
         }
     },
@@ -69,9 +77,9 @@ const allJobsSlice = createSlice({
                 state.totalJobs = totalJobs
                 state.numOfPages = numOfPages
             })
-            .addCase(getAllJobs.rejected, (state, {payload}) => {
+            .addCase(getAllJobs.rejected, (state, action) => {
                 state.isLoading = false
-                toast.error(payload)
+                toast.error(action.payload)
             })
             .addCase(showStats.pending, (state) => {
                 state.isLoading = true

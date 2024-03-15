@@ -1,23 +1,26 @@
-function FormRowSelect(props) {
+import {FormRowSelectProps} from "@/types/app";
 
-  const { name, labelText, value, itemList, handleChange } = props
 
-  return (
-    <div className="form-row">
+function FormRowSelect(props: FormRowSelectProps) {
 
-      <label htmlFor="status" className="form-label">
-        {labelText || name}
-      </label>
+    const {name, labelText, value, itemList, handleChange} = props
 
-      <select name={name} id={name} value={value} onChange={handleChange} className="form-select">
+    return (
+        <div className="form-row">
 
-        {/* Options */}
-        {itemList.map((item, index) => {
-          return <option key={index}>{item}</option>
-        })}
-      </select>
-    </div>
-  )
+            <label htmlFor="status" className="form-label">
+                {labelText || name}
+            </label>
+
+            <select name={name} id={name} value={value} onChange={handleChange} className="form-select">
+
+                {/* Options */}
+                {itemList.map((item, index) => {
+                    return <option key={index}>{item}</option>
+                })}
+            </select>
+        </div>
+    )
 }
 
 export default FormRowSelect

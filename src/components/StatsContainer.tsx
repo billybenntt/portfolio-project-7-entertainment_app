@@ -1,7 +1,7 @@
-import StatItem from './StatItem.tsx'
-import Wrapper from '../styles/wrappers/StatsContainer.tsx'
-import {useAppSelector} from '../store/hooks.ts';
-import {IconPending, IconScheduled, IconDeclined} from '../assets/icons'
+import {StatItem} from '@/components'
+import Wrapper from '@/styles/wrappers/StatsContainer.tsx'
+import {useAppSelector} from '@/store/hooks.ts';
+import {IconPending, IconScheduled, IconDeclined} from '@/assets/icons'
 
 
 function StatsContainer() {

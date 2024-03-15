@@ -1,9 +1,10 @@
 import {useEffect} from 'react'
 import {toast} from 'react-toastify'
-import {FormRow, FormRowSelect} from '../../components'
-import Wrapper from '../../styles/wrappers/DashboardFormPage.tsx'
-import {handleChange, clearValues, editJob, createJob} from '../../store/features/job/jobSlice.ts'
-import {useAppSelector, useAppDispatch} from '../../store/hooks.ts';
+import {FormRow, FormRowSelect} from '@/components'
+import Wrapper from '@/styles/wrappers/DashboardFormPage.tsx'
+import {handleChange, clearValues, editJob, createJob} from '@/store/features/job/jobSlice.ts'
+import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
+import {UpdateFormEvent, SubmitFormEvent} from "@/types/app";
 
 // ADD JOB PAGE
 
@@ -21,13 +22,13 @@ function AddJobPage() {
         dispatch(clearValues())
     }
 
-    const handleJobInput = (e) => {
+    const handleJobInput = (e: UpdateFormEvent) => {
         const inputName = e.target.name
         const inputValue = e.target.value
         dispatch(handleChange({inputName, inputValue}))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: SubmitFormEvent) => {
         e.preventDefault()
 
         // NO INPUT SUBMIT

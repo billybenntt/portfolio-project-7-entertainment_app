@@ -1,7 +1,8 @@
 import {Navigate} from 'react-router-dom'
-import {useAppSelector} from '../store/hooks.ts';
+import {useAppSelector} from '@/store/hooks.ts';
+import React from "react";
 
-function ProtectedRoute(props) {
+function ProtectedRoute(props: { children: React.ReactNode }) {
 
     const {children} = props
 

@@ -1,13 +1,14 @@
 import moment from 'moment'
-import JobInfo from './JobInfo.tsx'
+import {JobInfo} from '@/components'
 import {Link} from 'react-router-dom'
-import Wrapper from '../styles/wrappers/Job.tsx'
-import {deleteJob, setEditJob} from '../store/features/job/jobSlice.ts'
-import {useAppDispatch} from '../store/hooks.ts';
-import {IconJobType, IconJobLocation, IconJobDate} from '../assets/icons'
+import Wrapper from '@/styles/wrappers/Job.tsx'
+import {deleteJob, setEditJob} from '@/store/features/job/jobSlice.ts'
+import {useAppDispatch} from '@/store/hooks.ts';
+import {IconJobType, IconJobLocation, IconJobDate} from '@/assets/icons'
+import {JobType} from '@/types/app'
 
 
-function Job(props) {
+function Job(props: JobType) {
 
     const {_id: id, position, company, jobLocation, jobType, createdAt, status} = props
     const date = moment(createdAt).format('MMM Do, YYYY')

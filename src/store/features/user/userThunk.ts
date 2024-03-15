@@ -1,11 +1,11 @@
-import fetchData from '../../../utils/axios/fetchData.ts'
+import dataFetch from '../../../utils/axios/dataFetch.ts'
 import {clearStore, logoutUser} from './userSlice.ts'
 import {clearAllJobsState} from '../allJobs/allJobsSlice.ts'
 import {clearValues} from '../job/jobSlice.ts'
 
 export const registerUserThunk = async (url, userPayload, thunkAPI) => {
     try {
-        const {data} = await fetchData.post(url, userPayload)
+        const {data} = await dataFetch.post(url, userPayload)
         /* Return Successful Promise */
         return data
     } catch (error) {
@@ -17,7 +17,7 @@ export const registerUserThunk = async (url, userPayload, thunkAPI) => {
 
 export const loginUserThunk = async (url, userPayload, thunkAPI) => {
     try {
-        const {data} = await fetchData.post(url, userPayload)
+        const {data} = await dataFetch.post(url, userPayload)
         return data
     } catch (error) {
         const {response: {data: {msg}}} = error
@@ -27,7 +27,7 @@ export const loginUserThunk = async (url, userPayload, thunkAPI) => {
 
 export const updateUserThunk = async (url, userPayload, thunkAPI) => {
     try {
-        const {data} = await fetchData.patch(url, userPayload)
+        const {data} = await dataFetch.patch(url, userPayload)
 
         return data
     } catch (error) {

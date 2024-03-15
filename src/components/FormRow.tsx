@@ -1,4 +1,6 @@
-function FormRow(props) {
+import {FormRowProps} from "@/types/app";
+
+function FormRow(props: FormRowProps) {
 
     const {type, name, value, handleChange, labelText} = props
 
