@@ -1,4 +1,4 @@
-import {ImageLogo} from '../assets/images';
+import {ImageLogo} from '@/assets/images';
 
 function Logo() {
     return (

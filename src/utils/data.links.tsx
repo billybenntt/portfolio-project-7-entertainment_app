@@ -1,6 +1,6 @@
 import {IconStats, IconAllData, IconAddData, IconUserProfile} from '@/assets/icons';
 
-const links = [
+const dataLinks = [
     {
         id: 1,
         text: 'stats',
@@ -27,4 +27,4 @@ const links = [
     }
 ]
 
-export default links
+export default dataLinks

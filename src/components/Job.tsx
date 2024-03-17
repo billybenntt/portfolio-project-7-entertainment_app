@@ -5,7 +5,7 @@ import Wrapper from '@/styles/wrappers/Job.tsx'
 import {deleteJob, setEditJob} from '@/store/features/job/jobSlice.ts'
 import {useAppDispatch} from '@/store/hooks.ts';
 import {IconJobType, IconJobLocation, IconJobDate} from '@/assets/icons'
-import {JobType} from '@/types/app'
+import {JobType} from '@/types/app.definitions.ts'
 
 
 function Job(props: JobType) {

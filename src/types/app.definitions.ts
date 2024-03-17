@@ -17,22 +17,18 @@ export interface JobType {
 // COMPONENT PROPS
 
 export interface FormRowProps {
-    type: string
+    type?: string
     labelText?: string
-    handleChange: (value) => void;
+    handleChange: (value: UpdateFormEvent) => void;
     name: string,
     value: string | number
 }
 
-export interface FormRowSelectProps extends FormRowProps {
-    type? : string
-    itemList: Array<string>
-}
 
 
 
 
 
 // EVENT LISTENERS
-export type UpdateFormEvent = React.ChangeEvent<HTMLInputElement>
+export type UpdateFormEvent = React.ChangeEvent<HTMLInputElement> |  React.ChangeEvent<HTMLSelectElement>
 export type SubmitFormEvent = React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>;

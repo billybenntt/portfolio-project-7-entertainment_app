@@ -4,7 +4,7 @@ import {FormRow, FormRowSelect} from '@/components'
 import Wrapper from '@/styles/wrappers/DashboardFormPage.tsx'
 import {handleChange, clearValues, editJob, createJob} from '@/store/features/job/jobSlice.ts'
 import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
-import {UpdateFormEvent, SubmitFormEvent} from "@/types/app";
+import {UpdateFormEvent, SubmitFormEvent} from "@/types/app.definitions.ts";
 
 // ADD JOB PAGE
 

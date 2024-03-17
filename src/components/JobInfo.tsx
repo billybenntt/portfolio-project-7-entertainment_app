@@ -1,7 +1,13 @@
 import Wrapper from '@/styles/wrappers/JobInfo.tsx'
 import React from "react";
 
-function JobInfo(props: { text: string, icon: React.ReactElement }) {
+
+interface IProps {
+    text: string,
+    icon: React.ReactElement
+}
+
+function JobInfo(props: IProps) {
 
     const {icon, text} = props
 

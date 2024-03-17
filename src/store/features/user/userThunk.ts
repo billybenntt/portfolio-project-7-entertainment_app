@@ -1,10 +1,15 @@
-import dataFetch from '@/utils/axios/dataFetch.ts'
+import dataFetch from '@/utils/axios/data.fetch.ts'
 import {clearStore, logoutUser} from '@/store/features/user/userSlice.ts'
 import {clearAllJobsState} from '@/store/features/allJobs/allJobsSlice.ts'
 import {clearValues} from '@/store/features/job/jobSlice.ts'
 
+import {ReduxStore} from "@/store/store.ts";
 
-export const registerUserThunk = async (url: string, userPayload: object, thunkAPI: any) => {
+
+type thunkFunction = (url: string, thunkAPI: ReduxStore, userPayload: any) => Promise<string>
+
+
+export const registerUserThunk: thunkFunction = async (url, thunkAPI, userPayload,) => {
     try {
         const {data} = await dataFetch.post(url, userPayload)
         /* Return Successful Promise */
@@ -16,7 +21,7 @@ export const registerUserThunk = async (url: string, userPayload: object, thunkA
 
 }
 
-export const loginUserThunk = async (url: string, userPayload: object, thunkAPI: any) => {
+export const loginUserThunk: thunkFunction = async (url, userPayload, thunkAPI) => {
     try {
         const {data} = await dataFetch.post(url, userPayload)
         return data
@@ -26,7 +31,7 @@ export const loginUserThunk = async (url: string, userPayload: object, thunkAPI:
     }
 }
 
-export const updateUserThunk = async (url: string, userPayload: object, thunkAPI: any) => {
+export const updateUserThunk : thunkFunction = async (url, userPayload, thunkAPI) => {
     try {
         const {data} = await dataFetch.patch(url, userPayload)
 

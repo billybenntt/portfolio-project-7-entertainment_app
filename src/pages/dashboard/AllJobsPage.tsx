@@ -1,4 +1,6 @@
 import { SearchContainer, JobsContainer } from '@/components'
+
+
 function AllJobsPage () {
 
   return (

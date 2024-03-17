@@ -1,4 +1,4 @@
-import {FormRowProps} from "@/types/app";
+import {FormRowProps} from "@/types/app.definitions.ts";
 
 function FormRow(props: FormRowProps) {
 

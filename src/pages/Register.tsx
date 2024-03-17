@@ -5,7 +5,7 @@ import {toast} from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
 import {loginUser, registerUser} from '@/store/features/user/userSlice.ts'
 import {useAppSelector, useAppDispatch} from '@/store/hooks.ts'
-import {SubmitFormEvent, UpdateFormEvent} from "@/types/app";
+import {SubmitFormEvent, UpdateFormEvent} from "@/types/app.definitions.ts";
 
 /* Component State Template */
 const initialState = {

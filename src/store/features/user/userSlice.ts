@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import {toast} from 'react-toastify'
 import {loginUserThunk, registerUserThunk, updateUserThunk, clearStoreThunk} from './userThunk.ts'
-import {addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage} from '@/utils/localStorage.ts'
+import {addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage} from '@/utils/data.localstorage.ts'
 
 // User Slice Local State
 const initialState = {
@@ -12,21 +12,21 @@ const initialState = {
 
 // New User Thunk
 const registerUser = createAsyncThunk('user/registerUser',
-    async (userPayload: object, thunkAPI) => {
-        return registerUserThunk('auth/registerUser', userPayload, thunkAPI)
+    async (userPayload, thunkAPI) => {
+        return registerUserThunk('auth/registerUser', thunkAPI, userPayload)
     })
 
 // Login User Thunk
 const loginUser = createAsyncThunk('user/loginUser',
-    async (userPayload: object, thunkAPI) => {
-        return loginUserThunk('auth/login', userPayload, thunkAPI)
+    async (userPayload, thunkAPI) => {
+        return loginUserThunk('auth/login', thunkAPI, userPayload)
     })
 
 // Update User Thunk
 const updateUser = createAsyncThunk('user/updateUser',
     async (userPayload: object, thunkAPI) => {
         /* Get Token From Local State */
-        return updateUserThunk('/auth/updateUser', userPayload, thunkAPI)
+        return updateUserThunk('/auth/updateUser', thunkAPI, userPayload)
     })
 
 const clearStore = createAsyncThunk('user/clearStore', clearStoreThunk)

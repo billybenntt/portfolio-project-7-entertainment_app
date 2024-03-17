@@ -1,7 +1,6 @@
 import {toast} from 'react-toastify'
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {getAllJobsThunk, showStatsThunk} from './allJobsThunk.ts'
-import {ReduxStore} from "@/store/store.ts";
 
 
 const initialFilterState = {
@@ -30,14 +29,14 @@ const initialState = {
 
 const getAllJobs = createAsyncThunk('allJobs/getJobs',
     async (_, thunkAPI) => {
-        return getAllJobsThunk(_, thunkAPI as ReduxStore)
+        return getAllJobsThunk(_, thunkAPI)
     }
 )
 
 const showStats = createAsyncThunk('allJobs/showStats',
     async (_, thunkAPI) => {
 
-        return showStatsThunk('jobs/stats', thunkAPI as ReduxStore)
+        return showStatsThunk('jobs/stats', thunkAPI)
     })
 
 const allJobsSlice = createSlice({

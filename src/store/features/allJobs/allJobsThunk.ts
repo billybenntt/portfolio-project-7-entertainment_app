@@ -1,28 +1,34 @@
-import dataFetch from '@/utils/axios/dataFetch.ts'
-import {checkBadResponse} from '../user/userThunk.ts'
-import {RootState, ReduxStore} from "@/store/store.ts";
+import dataFetch from '@/utils/axios/data.fetch.ts'
+import {checkBadResponse} from '@/store/features/user/userThunk.ts'
+import {ReduxStore } from "@/store/store.ts";
 
 
-export const getAllJobsThunk = async (_: void, thunkAPI: ReduxStore) => {
 
-    const state = thunkAPI.getState() as RootState
-    const {search, page, searchStatus, searchType, sort} = state.allJobs
+type thunkFunction = (url: string, thunkAPI: ReduxStore) => Promise<string>
 
-    let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`
+
+
+export const getAllJobsThunk: thunkFunction = async (url: string, thunkAPI) => {
+
+    const {search, page, searchStatus, searchType, sort} = thunkAPI.getState().allJobs
+
+    console.log(url)
+
+    let searchURl = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`
     if (search) {
-        url = url + `&search=${search}`
+        searchURl = searchURl + `&search=${search}`
     }
 
 
     try {
-        const {data} = await dataFetch.get(url)
+        const {data} = await dataFetch.get(searchURl)
         return data
     } catch (error) {
         return checkBadResponse(error, thunkAPI)
     }
 }
 
-export const showStatsThunk = async (url: string, thunkAPI: ReduxStore) => {
+export const showStatsThunk: thunkFunction = async (url: string, thunkAPI) => {
     try {
         const {data} = await dataFetch.get(url)
         return data

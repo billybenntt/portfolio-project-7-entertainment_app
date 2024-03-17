@@ -3,7 +3,7 @@ import {Loading, Pagination, Job} from '@/components'
 import Wrapper from '@/styles/wrappers/JobsContainer.tsx'
 import { getAllJobs } from '@/store/features/allJobs/allJobsSlice.ts'
 import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
-import {JobType} from "@/types/app";
+import {JobType} from "@/types/app.definitions.ts";
 
 function JobsContainer () {
 

@@ -1,8 +1,8 @@
-import {FormRowSelect, FormRow} from './index.jsx'
+import {FormRowSelect, FormRow} from '@/components'
 import Wrapper from '@/styles/wrappers/DashboardFormPage.tsx'
 import {handleChange, clearFilters} from '@/store/features/allJobs/allJobsSlice.ts'
 import {useAppDispatch, useAppSelector} from '@/store/hooks.ts';
-import {SubmitFormEvent, UpdateFormEvent} from "@/types/app";
+import {SubmitFormEvent, UpdateFormEvent} from "@/types/app.definitions.ts";
 
 function SearchContainer() {
 
@@ -11,14 +11,14 @@ function SearchContainer() {
     const {jobTypeOptions, statusOptions} = useAppSelector(store => store.job)
     const {isLoading, search, searchStatus, searchType, sort, sortOptions} = useAppSelector(store => store.allJobs)
 
-    const handleSubmit = (e: SubmitFormEvent) => {
-        e.preventDefault()
+    const handleSubmit = (event: SubmitFormEvent) => {
+        event.preventDefault()
         dispatch(clearFilters())
     }
 
-    const handleSearch = (e: UpdateFormEvent) => {
-        const inputName = e.target.name
-        const inputValue = e.target.value
+    const handleSearch = (event: UpdateFormEvent) => {
+        const inputName = event.target.name
+        const inputValue = event.target.value
         // if (isLoading) return
         dispatch(handleChange({inputName, inputValue}))
     }

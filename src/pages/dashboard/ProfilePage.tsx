@@ -4,7 +4,7 @@ import Wrapper from '@/styles/wrappers/DashboardFormPage.tsx'
 import {toast} from 'react-toastify'
 import {updateUser} from '@/store/features/user/userSlice.ts'
 import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
-import {SubmitFormEvent, UpdateFormEvent} from '@/types/app'
+import {SubmitFormEvent, UpdateFormEvent} from '@/types/app.definitions.ts'
 
 function ProfilePage() {
 

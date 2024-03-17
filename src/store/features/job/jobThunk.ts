@@ -1,9 +1,14 @@
 import {clearValues} from './jobSlice.ts'
 import {checkBadResponse} from '../user/userThunk.ts'
-import dataFetch from '@/utils/axios/dataFetch.ts'
+import dataFetch from '@/utils/axios/data.fetch.ts'
 import {getAllJobs, showLoading} from '../allJobs/allJobsSlice.ts'
+import {ReduxStore} from "@/store/store.ts";
 
-export const createJobThunk = async (url: string, payload: object, thunkAPI: any) => {
+
+type thunkFunction = (url: string, thunkAPI: ReduxStore, payload: any) => Promise<string>
+
+
+export const createJobThunk: thunkFunction = async (url, thunkAPI, payload) => {
     try {
         const {data} = await dataFetch.post(url, payload)
         thunkAPI.dispatch(clearValues())
@@ -13,7 +18,7 @@ export const createJobThunk = async (url: string, payload: object, thunkAPI: any
     }
 }
 
-export const deleteJobThunk = async (url: string, thunkAPI: any) => {
+export const deleteJobThunk: thunkFunction = async (url, thunkAPI) => {
     /* Show Loading from AllJobsPage  */
     thunkAPI.dispatch(showLoading())
 
@@ -28,7 +33,7 @@ export const deleteJobThunk = async (url: string, thunkAPI: any) => {
     }
 }
 
-export const editJobThunk = async (url: string, payload: { job: string, jobId: string }, thunkAPI: any) => {
+export const editJobThunk: thunkFunction = async (url: string, thunkAPI, payload) => {
     const {jobId, job} = payload
     try {
         const {data} = await dataFetch.patch(`${url}/${jobId}`, job)

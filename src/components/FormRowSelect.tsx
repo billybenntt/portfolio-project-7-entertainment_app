@@ -1,7 +1,17 @@
-import {FormRowSelectProps} from "@/types/app";
+import {UpdateFormEvent} from "@/types/app.definitions.ts";
 
 
-function FormRowSelect(props: FormRowSelectProps) {
+interface IProps {
+    type?: string
+    itemList: string[]
+    labelText?: string
+    handleChange: (value: UpdateFormEvent) => void;
+    name: string,
+    value: string | number
+}
+
+
+function FormRowSelect(props: IProps) {
 
     const {name, labelText, value, itemList, handleChange} = props
 

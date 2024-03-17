@@ -2,7 +2,7 @@ import Wrapper from '@/styles/wrappers/StatItem.jsx'
 import React from "react";
 
 
-interface StatItemProps {
+interface IProps {
     count: number,
     title: string,
     icon: React.ReactElement,
@@ -10,7 +10,7 @@ interface StatItemProps {
 }
 
 
-function StatItem(props: StatItemProps) {
+function StatItem(props: IProps) {
 
     const {count, title, icon, color} = props
 

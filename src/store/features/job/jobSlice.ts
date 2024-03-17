@@ -1,6 +1,6 @@
 import {toast} from 'react-toastify'
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {getUserFromLocalStorage} from '@/utils/localStorage.ts'
+import {getUserFromLocalStorage} from '@/utils/data.localstorage.ts'
 import {createJobThunk, deleteJobThunk, editJobThunk} from './jobThunk.ts'
 
 
