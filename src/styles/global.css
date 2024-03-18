@@ -289,9 +289,6 @@ ul {
     }
 }
 
-.logo{
-    width: 50px;
-}
 
 
 .loading {
@@ -354,6 +351,9 @@ ul {
     .coffee-info {
         text-align: left;
     }
+
+
+
 
     .coffee-info span {
         display: inline-block;

@@ -13,20 +13,20 @@ const initialState = {
 // New User Thunk
 const registerUser = createAsyncThunk('user/registerUser',
     async (userPayload, thunkAPI) => {
-        return registerUserThunk('auth/registerUser', thunkAPI, userPayload)
+        return registerUserThunk('auth/registerUser', userPayload, thunkAPI)
     })
 
 // Login User Thunk
 const loginUser = createAsyncThunk('user/loginUser',
     async (userPayload, thunkAPI) => {
-        return loginUserThunk('auth/login', thunkAPI, userPayload)
+        return loginUserThunk('auth/login',  userPayload, thunkAPI)
     })
 
 // Update User Thunk
 const updateUser = createAsyncThunk('user/updateUser',
     async (userPayload: object, thunkAPI) => {
         /* Get Token From Local State */
-        return updateUserThunk('/auth/updateUser', thunkAPI, userPayload)
+        return updateUserThunk('/auth/updateUser', userPayload, thunkAPI)
     })
 
 const clearStore = createAsyncThunk('user/clearStore', clearStoreThunk)

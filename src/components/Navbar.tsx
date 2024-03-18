@@ -44,7 +44,6 @@ function Navbar() {
 
                 {/*  TEXT */}
                 <div>
-                    <Logo/>
                     <h3 className="logo-text">Dashboard</h3>
                 </div>
 
