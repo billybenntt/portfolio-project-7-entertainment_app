@@ -1,16 +1,14 @@
 import dataFetch from '@/utils/axios/data.fetch.ts'
 import {checkBadResponse} from '@/store/features/user/userThunk.ts'
-import {ReduxStore } from "@/store/store.ts";
-
+import {ReduxStore} from "@/store/store.ts";
 
 
 type thunkFunction = (url: string, thunkAPI: ReduxStore) => Promise<string>
 
 
-
 export const getAllJobsThunk: thunkFunction = async (url: string, thunkAPI) => {
 
-    const {search, page, searchStatus, searchType, sort} = thunkAPI.getState().allJobs
+    const {search} = thunkAPI.getState().allJobs
 
 
     const searchURl = `/rest/v1/jobs?select=*`
