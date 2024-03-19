@@ -6,10 +6,10 @@ import {clearValues} from '@/store/features/job/jobSlice.ts'
 import {ReduxStore} from "@/store/store.ts";
 
 
-type thunkFunction = (url: string, thunkAPI: ReduxStore, userPayload: any) => Promise<string>
+type thunkFunction = (url: string, userPayload: any , thunkAPI: ReduxStore) => Promise<string>
 
 
-export const registerUserThunk: thunkFunction = async (url, thunkAPI, userPayload,) => {
+export const registerUserThunk: thunkFunction = async (url, userPayload, thunkAPI) => {
     try {
         const {data} = await dataFetch.post(url, userPayload)
         /* Return Successful Promise */
@@ -24,6 +24,7 @@ export const registerUserThunk: thunkFunction = async (url, thunkAPI, userPayloa
 export const loginUserThunk: thunkFunction = async (url, userPayload, thunkAPI) => {
     try {
         const {data} = await dataFetch.post(url, userPayload)
+
         return data
     } catch (error: any) {
         const {response: {data: {msg}}} = error

@@ -5,10 +5,10 @@ import {getAllJobs, showLoading} from '../allJobs/allJobsSlice.ts'
 import {ReduxStore} from "@/store/store.ts";
 
 
-type thunkFunction = (url: string, thunkAPI: ReduxStore, payload: any) => Promise<string>
+type thunkFunction = (url: string, payload: any, thunkAPI: ReduxStore) => Promise<string>
 
 
-export const createJobThunk: thunkFunction = async (url, thunkAPI, payload) => {
+export const createJobThunk: thunkFunction = async (url, payload, thunkAPI,) => {
     try {
         const {data} = await dataFetch.post(url, payload)
         thunkAPI.dispatch(clearValues())
@@ -18,7 +18,7 @@ export const createJobThunk: thunkFunction = async (url, thunkAPI, payload) => {
     }
 }
 
-export const deleteJobThunk: thunkFunction = async (url, thunkAPI) => {
+export const deleteJobThunk = async (url, thunkAPI) => {
     /* Show Loading from AllJobsPage  */
     thunkAPI.dispatch(showLoading())
 
@@ -33,10 +33,10 @@ export const deleteJobThunk: thunkFunction = async (url, thunkAPI) => {
     }
 }
 
-export const editJobThunk: thunkFunction = async (url: string, thunkAPI, payload) => {
+export const editJobThunk: thunkFunction = async (url: string, payload, thunkAPI) => {
     const {jobId, job} = payload
     try {
-        const {data} = await dataFetch.patch(`${url}/${jobId}`, job)
+        const {data} = await dataFetch.patch(`${url}${jobId}`, job)
         thunkAPI.dispatch(clearValues())
         return data
     } catch (error) {

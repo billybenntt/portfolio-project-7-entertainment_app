@@ -9,7 +9,6 @@ import {SubmitFormEvent, UpdateFormEvent} from "@/types/app.definitions.ts";
 
 /* Component State Template */
 const initialState = {
-    name: '',
     email: '',
     password: '',
     isMember: false
@@ -33,18 +32,18 @@ function Register() {
     }, [user])
 
     // FORM CHANGE INPUT VALUE
-    const handleChange = (e: UpdateFormEvent) => {
-        const name = e.target.name
-        const value = e.target.value
+    const handleChange = (event: UpdateFormEvent) => {
+        const name = event.target.name
+        const value = event.target.value
         setValues({...values, [name]: value})
     }
 
     // FORM EVENT HANDLER
     const handleSubmit = (e: SubmitFormEvent) => {
         e.preventDefault()
-        const {name, email, password, isMember} = values
+        const {email, password, isMember} = values
         /*No Email, No Password, No Member + No Name*/
-        if (!email || !password || (!isMember && !name)) {
+        if (!email || !password) {
             toast.warning('Input all the fields')
             return
         }
@@ -54,7 +53,7 @@ function Register() {
             return
         }
         /* Default Action - Register User */
-        dispatch((registerUser({name, email, password})))
+        dispatch((registerUser({email, password})))
     }
 
     // EVENT HANDLER
@@ -70,8 +69,7 @@ function Register() {
                 <h3>{values.isMember ? 'Login' : 'Register'}</h3>
 
                 {/*INPUT FIELDS */}
-                {!values.isMember &&
-                  <FormRow type="text" name="name" value={values.name} handleChange={handleChange}/>}
+
                 <FormRow type="email" name="email" value={values.email} handleChange={handleChange}/>
                 <FormRow type="password" name="password" value={values.password} handleChange={handleChange}/>
 

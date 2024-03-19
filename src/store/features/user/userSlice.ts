@@ -13,13 +13,13 @@ const initialState = {
 // New User Thunk
 const registerUser = createAsyncThunk('user/registerUser',
     async (userPayload, thunkAPI) => {
-        return registerUserThunk('auth/registerUser', userPayload, thunkAPI)
+        return registerUserThunk('/auth/v1/signup', userPayload, thunkAPI)
     })
 
 // Login User Thunk
 const loginUser = createAsyncThunk('user/loginUser',
     async (userPayload, thunkAPI) => {
-        return loginUserThunk('auth/login',  userPayload, thunkAPI)
+        return loginUserThunk('/auth/v1/token?grant_type=password', userPayload, thunkAPI)
     })
 
 // Update User Thunk
@@ -55,7 +55,8 @@ const userSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(updateUser.fulfilled, (state, {payload}) => {
-                const {user} = payload
+                const {user, access_token} = payload
+                state.user.token = access_token
                 state.user = user
                 addUserToLocalStorage(state.user)
                 toast.success(`User updated`)
@@ -70,11 +71,12 @@ const userSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(registerUser.fulfilled, (state, {payload}) => {
-                const {user} = payload
+                const {user, access_token} = payload
                 state.user = user
+                state.user.token = access_token
                 addUserToLocalStorage(state.user)
                 state.isLoading = false
-                toast.success(`Hello ${state.user.name}`)
+                toast.success(`Hello New User`)
             })
             .addCase(registerUser.rejected, (state, {payload}) => {
                 state.isLoading = false
@@ -84,12 +86,13 @@ const userSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(loginUser.fulfilled, (state, {payload}) => {
-                const {user} = payload
+                const {user, access_token} = payload
                 state.user = user
+                state.user.token = access_token
                 addUserToLocalStorage(state.user)
                 state.isLoading = false
                 state.isSidebarOpen = true
-                toast.success(`Welcome back ${state.user.name}`)
+                toast.success(`Welcome Back User`)
             })
             .addCase(loginUser.rejected, (state, {payload}) => {
                 state.isLoading = false

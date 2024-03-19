@@ -25,19 +25,19 @@ type updateState = {
 
 const createJob = createAsyncThunk('job/CreateJob',
     async (jobPayload: object, thunkAPI) => {
-        return createJobThunk('jobs', jobPayload, thunkAPI)
+        return createJobThunk('/rest/v1/jobs', jobPayload, thunkAPI)
     }
 )
 
 const deleteJob = createAsyncThunk('allJobs/deleteJob',
     async (jobId: string, thunkAPI) => {
-        return deleteJobThunk(`jobs/${jobId}`, thunkAPI)
+        return deleteJobThunk(`/rest/v1/jobs?_id=eq.${jobId}`, thunkAPI)
     }
 )
 
 const editJob = createAsyncThunk('job/editJob',
     async (editPayload: object, thunkAPI) => {
-        return editJobThunk('jobs', editPayload, thunkAPI)
+        return editJobThunk(`/rest/v1/jobs?_id=eq.`, editPayload, thunkAPI)
     }
 )
 

@@ -12,7 +12,9 @@ function StatsPage() {
 
     // EFFECT - LOAD DATA
     useEffect(() => {
-        dispatch(showStats())
+
+        // load stats
+
     }, [dispatch])
 
 

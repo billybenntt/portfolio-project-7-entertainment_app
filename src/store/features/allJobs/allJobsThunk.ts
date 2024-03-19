@@ -12,16 +12,16 @@ export const getAllJobsThunk: thunkFunction = async (url: string, thunkAPI) => {
 
     const {search, page, searchStatus, searchType, sort} = thunkAPI.getState().allJobs
 
-    console.log(url)
 
-    let searchURl = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`
-    if (search) {
-        searchURl = searchURl + `&search=${search}`
-    }
-
+    const searchURl = `/rest/v1/jobs?select=*`
+    // if (search) {
+    //     searchURl = searchURl + `&search=${search}`
+    // }
 
     try {
         const {data} = await dataFetch.get(searchURl)
+
+        console.log("data", data)
         return data
     } catch (error) {
         return checkBadResponse(error, thunkAPI)
