@@ -1,32 +1,35 @@
 import dataLinks from '@/utils/data.links.tsx'
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
-function NavLinks ({ toggleSidebar }) {
+function NavLinks(props) {
 
-  // NAV LINK CLASS HANDLER
-  const handleClass = (status) => {
-    const { isActive } = status
-    return isActive ? 'nav-link active' : 'nav-link'
-  }
+    const {toggleSidebar} = props
 
-  // GENERATE ELEMENTS
-  const sidebarLinks = dataLinks.map((item) => {
-    const { id, path, icon, text } = item
+
+    // NAV LINK CLASS HANDLER
+    const handleClass = (status) => {
+        const {isActive} = status
+        return isActive ? 'nav-link active' : 'nav-link'
+    }
+
+    // GENERATE ELEMENTS
+    const sidebarLinks = dataLinks.map((item) => {
+        const {id, path, icon, text} = item
+        return (
+            <NavLink key={id}
+                to={path} className={handleClass}
+                onClick={toggleSidebar}>
+                <span className="icon">{icon}</span>
+                {text}
+            </NavLink>
+        )
+    })
+
     return (
-      <NavLink key={id}
-        to={path} className={handleClass}
-        onClick={toggleSidebar}>
-        <span className="icon">{icon}</span>
-        {text}
-      </NavLink>
+        <div className="nav-links">
+            {sidebarLinks}
+        </div>
     )
-  })
-
-  return (
-    <div className="nav-links">
-      {sidebarLinks}
-    </div>
-  )
 }
 
 export default NavLinks

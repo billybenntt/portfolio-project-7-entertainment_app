@@ -14,7 +14,6 @@ function JobsContainer() {
         jobs,
         page,
         totalJobs,
-        numOfPages,
         search,
         searchStatus,
         searchType,
@@ -62,7 +61,8 @@ function JobsContainer() {
             <div className="jobs">
                 {jobsList}
             </div>
-            {numOfPages > 1 && <Pagination/>}
+            {/*{numOfPages > 1 && <Pagination/>}*/}
+            <Pagination  />
         </Wrapper>
     )
 }

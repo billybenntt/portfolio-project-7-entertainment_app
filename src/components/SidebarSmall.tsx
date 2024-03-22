@@ -7,7 +7,7 @@ import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
 
 // SIDEBAR COMPONENT
 /* Hidden on Large Screen Sizes*/
-function SmallSideBar() {
+function SidebarSmall() {
 
     const dispatch = useAppDispatch()
     const {isSidebarOpen} = useAppSelector(store => store.user)
@@ -43,4 +43,4 @@ function SmallSideBar() {
     )
 }
 
-export default SmallSideBar
+export default SidebarSmall

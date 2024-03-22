@@ -1,13 +1,17 @@
 import {Area, YAxis, XAxis, Tooltip, AreaChart, CartesianGrid, ResponsiveContainer} from 'recharts'
-
-function Chart(props: { data: [] }) {
-
-    const {data} = props
+import {chartData} from "@/types/app.definitions.ts";
 
 
+interface IProps {
+    data: chartData[]
+}
+
+
+
+function Chart(props: IProps) {
     return (
         <ResponsiveContainer width="100%" height={300}>
-            <AreaChart data={data}>
+            <AreaChart data={props.data}>
                 <XAxis dataKey="date"/>
                 <YAxis allowDecimals={false}/>
                 <CartesianGrid strokeDasharray="10 10"/>

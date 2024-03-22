@@ -1,12 +1,13 @@
 import {useState} from 'react'
 import {BarChart, AreaChart} from '@/components/charts'
-import {useAppSelector} from '@/store/hooks.ts'
 import Wrapper from '@/styles/wrappers/ChartsContainer.tsx'
+import {chartData} from '@/utils/data.placeholder.ts'
 
 function ChartsContainer() {
 
-    const {monthlyApplications: data} = useAppSelector(store => store.allJobs)
+
     const [barChart, setBarChart] = useState(true)
+
 
     function toggleChart() {
         setBarChart(!barChart)
@@ -18,7 +19,7 @@ function ChartsContainer() {
             <button type="button" onClick={toggleChart}>
                 {barChart ? 'Area Chart' : 'Bar Chart'}
             </button>
-            {barChart ? <BarChart data={data}/> : <AreaChart data={data}/>}
+            {barChart ? <BarChart data={chartData}/> : <AreaChart data={chartData}/>}
         </Wrapper>
     )
 }

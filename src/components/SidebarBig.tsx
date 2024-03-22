@@ -5,7 +5,7 @@ import {useAppSelector} from '@/store/hooks.ts';
 
 // SIDEBAR COMPONENT
 /* Hidden on Small Screen Sizes*/
-function BigSideBar() {
+function SidebarBig() {
 
     const {isSidebarOpen} = useAppSelector(store => store.user)
 
@@ -19,7 +19,7 @@ function BigSideBar() {
                     <header>
                         <Logo/>
                     </header>
-                    <NavLinks/>
+                    <NavLinks toggleSidebar={isSidebarOpen}/>
                 </div>
 
 
@@ -28,4 +28,4 @@ function BigSideBar() {
     )
 }
 
-export default BigSideBar
+export default SidebarBig

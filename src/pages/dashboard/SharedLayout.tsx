@@ -1,6 +1,6 @@
 import {Outlet} from 'react-router-dom'
 import Wrapper from '@/styles/wrappers/SharedLayout.tsx'
-import {BigSideBar, Navbar, SmallSideBar} from '@/components'
+import {SidebarBig, Navbar, SidebarSmall} from '@/components'
 
 // DASHBOARD PAGE 
 function SharedLayout() {
@@ -9,8 +9,8 @@ function SharedLayout() {
             <main className="dashboard">
 
                 {/*SHARED COMPONENTS */}
-                <BigSideBar/>
-                <SmallSideBar/>
+                <SidebarBig/>
+                <SidebarSmall/>
 
                 <div className="dashboard-content">
                     <Navbar/>

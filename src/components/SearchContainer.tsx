@@ -8,30 +8,27 @@ function SearchContainer() {
 
     const dispatch = useAppDispatch()
 
-    const {jobTypeOptions, statusOptions} = useAppSelector(store => store.job)
-    const {isLoading, search, searchStatus, searchType, sort, sortOptions} = useAppSelector(store => store.allJobs)
+    const {jobTypeOptions, statusOptions} = useAppSelector(store => store.job.singleJob)
+    const {isLoading, searchOptions} = useAppSelector(store => store.allJobs)
+    const {search, searchStatus, searchType, sort, sortOptions} = searchOptions
 
-    const handleSubmit = (event: SubmitFormEvent) => {
-        event.preventDefault()
-        dispatch(clearFilters())
-    }
 
-    const handleSearch = (event: UpdateFormEvent) => {
+    const handleSearch = (event: UpdateFormEvent): void  => {
         const inputName = event.target.name
         const inputValue = event.target.value
-        // if (isLoading) return
         dispatch(handleChange({inputName, inputValue}))
+    }
+
+    const handleClear = (event: SubmitFormEvent) => {
+        event.preventDefault()
+        dispatch(clearFilters())
     }
 
     return (
         <Wrapper>
             <form className="form">
-
                 <h4>Search Form</h4>
-
-
                 <div className="form-center">
-
                     {/*Search */}
                     <FormRow type="text"
                         name="search"
@@ -62,7 +59,7 @@ function SearchContainer() {
 
 
                     <button className="btn btn-block btn-danger"
-                        onClick={handleSubmit}
+                        onClick={handleClear}
                         disabled={isLoading}>
                         Clear Filters
                     </button>

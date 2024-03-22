@@ -13,10 +13,13 @@ function AddJobPage() {
     const {user} = useAppSelector(store => store.user)
     const dispatch = useAppDispatch()
 
+
     const {
-        isLoading, position, company, jobLocation, jobTypeOptions,
-        status, statusOptions, isEditing, jobType, editJobID
+        isLoading, isEditing, singleJob
     } = useAppSelector(store => store.job)
+
+    const {jobLocation, jobType, editJobID, company, jobTypeOptions, status, statusOptions, position} = singleJob
+
 
     const handleClear = () => {
         dispatch(clearValues())
@@ -50,7 +53,6 @@ function AddJobPage() {
                 }
             }
             dispatch(editJob(editPayload))
-
             return
         }
 

@@ -1,30 +1,30 @@
 import {toast} from 'react-toastify'
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import {getUserFromLocalStorage} from '@/utils/data.localstorage.ts'
 import {createJobThunk, deleteJobThunk, editJobThunk} from './jobThunk.ts'
+import {JobState} from '@/types/app.definitions.ts'
 
 
-const initialState = {
+const initialState: JobState = {
     isLoading: false,
-    position: '',
-    company: '',
-    jobLocation: '',
-    jobType: 'full-time',
-    jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
-    status: 'pending',
-    statusOptions: ['interview', 'declined', 'pending'],
     isEditing: false,
-    editJobID: ''
+    singleJob: {
+        position: '',
+        company: '',
+        jobLocation: '',
+        jobType: 'full-time',
+        jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
+        status: 'pending',
+        statusOptions: ['interview', 'declined', 'pending'],
+        editJobID: ''
+    }
+
 }
 
 
-type updateState = {
-    inputName: string
-    inputValue: string
-}
 
 const createJob = createAsyncThunk('job/CreateJob',
-    async (jobPayload: object, thunkAPI) => {
+    async (jobPayload: string, thunkAPI) => {
         return createJobThunk('/rest/v1/jobs', jobPayload, thunkAPI)
     }
 )
@@ -48,15 +48,15 @@ const jobSlice = createSlice({
     reducers: {
         setEditJob: (state, action) => {
             const {payload} = action
-            /* This payload  overrides the existing state*/
+            /* This payload overrides the existing state*/
             return {...state, ...payload, isEditing: true,}
         },
-        handleChange: (state, action: PayloadAction<updateState>) => {
-            const {payload} = action
-            const {inputName, inputValue} = payload
-            state[inputName] = inputValue
-
+        handleChange: (state, action) => {
+            const {inputName, inputValue} = action.payload
+            const name = inputName as keyof typeof initialState.singleJob
+            state.singleJob[name] = inputValue
         },
+
         clearValues: () => {
             const {location} = getUserFromLocalStorage()
             /* Reset to Default State */
@@ -70,32 +70,30 @@ const jobSlice = createSlice({
             })
             .addCase(createJob.fulfilled, (state) => {
                 state.isLoading = false
-                toast.success('Job Created')
+                toast.success("Job created successfully")
             })
-            .addCase(createJob.rejected, (state, action) => {
+            .addCase(createJob.rejected, (state) => {
                 state.isLoading = false
-                const message = action.payload as string
-                toast.error(message)
+                toast.error("failed to create job")
             })
-            .addCase(deleteJob.fulfilled, (_, action) => {
-                const {msg} = action.payload
-                toast.success(msg)
+            .addCase(deleteJob.fulfilled, (state) => {
+                state.isLoading = false
+                toast.success("Job deleted successfully")
             })
-            .addCase(deleteJob.rejected, (_, action) => {
-                console.log(action)
-                const message = action.payload as string
-                toast.error(message)
+            .addCase(deleteJob.rejected, (state) => {
+                state.isLoading = false
+                toast.error("failed to delete job")
             })
             .addCase(editJob.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(editJob.fulfilled, () => {
-                toast.success('Job Modified...')
-            })
-            .addCase(editJob.rejected, (state, action) => {
+            .addCase(editJob.fulfilled, (state) => {
                 state.isLoading = false
-                const message = action.payload as string
-                toast.error(message)
+                toast.success("Job modified successfully")
+            })
+            .addCase(editJob.rejected, (state) => {
+                state.isLoading = false
+                toast.error("failed to edit job")
             })
     }
 

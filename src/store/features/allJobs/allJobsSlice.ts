@@ -1,17 +1,10 @@
 import {toast} from 'react-toastify'
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import {getAllJobsThunk, showStatsThunk} from './allJobsThunk.ts'
+import {getAllJobsThunk} from './allJobsThunk.ts'
+import {AllJobsState} from '@/types/app.definitions.ts'
 
 
-const initialFilterState = {
-    search: '',
-    searchStatus: 'all',
-    searchType: 'all',
-    sort: 'latest',
-    sortOptions: ['latest', 'oldest', 'a-z', 'z-a']
-}
-
-const initialState = {
+const initialState: AllJobsState = {
     isLoading: false,
     jobs: [],
     totalJobs: 0,
@@ -22,22 +15,23 @@ const initialState = {
         pending: 0,
         declined: 0
     },
-    monthlyApplications: [],
-    ...initialFilterState
+    chartData: [],
+    searchOptions: {
+        search: '',
+        searchStatus: 'all',
+        searchType: 'all',
+        sort: 'latest',
+        sortOptions: ['latest', 'oldest', 'a-z', 'z-a']
+    }
 }
 
 
 const getAllJobs = createAsyncThunk('allJobs/getJobs',
     async (_, thunkAPI) => {
-        return getAllJobsThunk(_, thunkAPI)
+        return getAllJobsThunk('/rest/v1/jobs?select=*', thunkAPI)
     }
 )
 
-const showStats = createAsyncThunk('allJobs/showStats',
-    async (_, thunkAPI) => {
-
-        return showStatsThunk('jobs/stats', thunkAPI)
-    })
 
 const allJobsSlice = createSlice({
     name: 'allJobs',
@@ -46,16 +40,13 @@ const allJobsSlice = createSlice({
         showLoading: (state) => {
             state.isLoading = true
         },
-        hideLoading: (state) => {
-            state.isLoading = false
-        },
         handleChange: (state, action) => {
             const {inputName, inputValue} = action.payload
-            state.page = 1
-            state[inputName] = inputValue
+            const name = inputName as keyof typeof initialState.searchOptions
+            state.searchOptions[name] = inputValue
         },
         clearFilters: (state) => {
-            return {...state, ...initialFilterState, page: 1}
+            state.isLoading = false
         },
         changePage: (state, action) => {
             state.page = action.payload
@@ -71,35 +62,18 @@ const allJobsSlice = createSlice({
             })
             .addCase(getAllJobs.fulfilled, (state, {payload}) => {
                 state.isLoading = false
-                const jobs: object[] = payload
-                state.jobs = jobs
-                state.totalJobs = jobs.length
-                state.numOfPages = 0
+                state.jobs = payload
+                state.totalJobs = payload.length
             })
-            .addCase(getAllJobs.rejected, (state, action) => {
+            .addCase(getAllJobs.rejected, (state) => {
                 state.isLoading = false
-                const message = action.payload as string
-                toast.error(message)
+                toast.error("failed to get all jobs")
             })
-            .addCase(showStats.pending, (state) => {
-                state.isLoading = true
-            })
-            .addCase(showStats.fulfilled, (state, {payload}) => {
-                const {defaultStats, monthlyApplications} = payload
-                state.isLoading = false
-                state.stats = defaultStats
-                state.monthlyApplications = monthlyApplications
-            })
-            .addCase(showStats.rejected, (state, action) => {
-                state.isLoading = false
-                const message = action.payload as string
-                toast.error(message)
-            });
     }
 
 })
 
-export {getAllJobs, showStats}
+export {getAllJobs}
 export default allJobsSlice.reducer
 export const {
     showLoading,

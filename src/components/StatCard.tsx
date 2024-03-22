@@ -10,7 +10,7 @@ interface IProps {
 }
 
 
-function StatItem(props: IProps) {
+function StatCard(props: IProps) {
 
     const {count, title, icon, color} = props
 
@@ -25,4 +25,4 @@ function StatItem(props: IProps) {
     )
 }
 
-export default StatItem
+export default StatCard

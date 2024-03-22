@@ -1,12 +1,14 @@
 import {changePage} from '@/store/features/allJobs/allJobsSlice.ts'
 import Wrapper from '@/styles/wrappers/PageBtnContainer.tsx'
-import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
+import { useAppDispatch} from '@/store/hooks.ts';
 import {IconArrowLeft, IconArrowRight} from '@/assets/icons'
 
 function Pagination() {
 
     const dispatch = useAppDispatch()
-    const {page, numOfPages} = useAppSelector(store => store.allJobs)
+
+    const page = 1
+    const numOfPages = 5
 
     const nextPage = () => {
         let currentPage = page + 1

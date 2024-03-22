@@ -3,27 +3,20 @@ import {clearStore, logoutUser} from '@/store/features/user/userSlice.ts'
 import {clearAllJobsState} from '@/store/features/allJobs/allJobsSlice.ts'
 import {clearValues} from '@/store/features/job/jobSlice.ts'
 
-import {ReduxStore} from "@/store/store.ts";
 
-
-type thunkFunction = (url: string, userPayload: any , thunkAPI: ReduxStore) => Promise<string>
-
-
-export const registerUserThunk: thunkFunction = async (url, userPayload, thunkAPI) => {
+const registerUserThunk = async (url, payload, thunkAPI) => {
     try {
-        const {data} = await dataFetch.post(url, userPayload)
-        /* Return Successful Promise */
+        const {data} = await dataFetch.post(url, payload)
         return data
-    } catch (error: any) {
-        const {response: {data: {msg}}} = error
-        return thunkAPI.rejectWithValue(msg)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data['msg'])
     }
 
 }
 
-export const loginUserThunk: thunkFunction = async (url, userPayload, thunkAPI) => {
+const loginUserThunk = async (url, payload, thunkAPI) => {
     try {
-        const {data} = await dataFetch.post(url, userPayload)
+        const {data} = await dataFetch.post(url, payload)
 
         return data
     } catch (error: any) {
@@ -32,9 +25,9 @@ export const loginUserThunk: thunkFunction = async (url, userPayload, thunkAPI) 
     }
 }
 
-export const updateUserThunk : thunkFunction = async (url, userPayload, thunkAPI) => {
+const updateUserThunk = async (url, payload, thunkAPI) => {
     try {
-        const {data} = await dataFetch.patch(url, userPayload)
+        const {data} = await dataFetch.patch(url, payload)
 
         return data
     } catch (error) {
@@ -43,7 +36,7 @@ export const updateUserThunk : thunkFunction = async (url, userPayload, thunkAPI
 }
 
 // CLEAR STORE THUNK
-export const clearStoreThunk = async (message: string, thunkAPI: any) => {
+const clearStoreThunk = async (message, thunkAPI) => {
     try {
         /* Clear Add jobs State */
         thunkAPI.dispatch(clearValues())
@@ -58,12 +51,14 @@ export const clearStoreThunk = async (message: string, thunkAPI: any) => {
     }
 }
 
-export const checkBadResponse = async (error: any, thunkAPI: any) => {
+const checkBadResponse = async (error, thunkAPI) => {
     const {response: {data: {msg}, status}} = error
     if (status === 401) {
-        thunkAPI.dispatch(clearStore)
+        thunkAPI.dispatch(clearStore(""))
         return thunkAPI.rejectWithValue('Unauthorized logging user out')
     }
     return thunkAPI.rejectWithValue(msg)
 
 }
+
+export {registerUserThunk, loginUserThunk, updateUserThunk, clearStoreThunk, checkBadResponse}

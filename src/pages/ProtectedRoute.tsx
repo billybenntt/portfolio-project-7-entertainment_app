@@ -6,7 +6,6 @@ function ProtectedRoute(props: { children: React.ReactNode }) {
 
     const {children} = props
 
-
     const {user} = useAppSelector(state => state.user)
 
     // RETURN TO LANDING

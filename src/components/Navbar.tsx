@@ -1,5 +1,5 @@
 import Wrapper from '@/styles/wrappers/Navbar.jsx'
-import {toggleSidebar, clearStore} from '@/store/features/user/userSlice.ts'
+import {toggleSidebar, logoutUser} from '@/store/features/user/userSlice.ts'
 import {useState} from 'react'
 import {useAppSelector, useAppDispatch} from '@/store/hooks.ts';
 import {IconCollapse, IconUser, IconArrowDown} from '@/assets/icons'
@@ -11,6 +11,8 @@ function Navbar() {
     const dispatch = useAppDispatch()
     const [showLogout, setShowLogout] = useState(false)
     const {user} = useAppSelector(store => store.user)
+    const userName = user?.email.split('@')[0] || "username"
+
 
     // EVENT HANDLERS
     const handleSidebarToggle = () => {
@@ -22,7 +24,7 @@ function Navbar() {
     }
 
     const handleLogout = () => {
-        dispatch(clearStore('Logged out'))
+        dispatch(logoutUser("logging out"))
     }
 
 
@@ -52,7 +54,7 @@ function Navbar() {
                         onClick={handleLogoutToggle}
                         className="btn">
                         <IconUser/>
-                        {user?.email}
+                        {userName}
                         <IconArrowDown/>
                     </button>
 

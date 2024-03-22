@@ -1,5 +1,5 @@
-import AreaChart from "./AreaChart.tsx";
-import BarChart from "./BarChart.tsx";
+import AreaChart from "./ChartArea.tsx";
+import BarChart from "./ChartBar.tsx";
 import ChartsContainer from "./ChartsContainer.tsx";
 
 export {AreaChart, BarChart, ChartsContainer};
