@@ -4,7 +4,7 @@ import dataFetch from '@/utils/axios/data.fetch.ts'
 import {getAllJobs, showLoading} from '@/store/features/allJobs/allJobsSlice.ts'
 
 
-const createJobThunk = async (url, payload, thunkAPI) => {
+const createJobThunk = async (url: string, payload: any, thunkAPI: any) => {
     try {
         const {data} = await dataFetch.post(url, payload)
         thunkAPI.dispatch(clearValues())
@@ -14,9 +14,8 @@ const createJobThunk = async (url, payload, thunkAPI) => {
     }
 }
 
-const deleteJobThunk = async (url, thunkAPI) => {
+const deleteJobThunk = async (url: string, thunkAPI: any) => {
     thunkAPI.dispatch(showLoading())
-
     try {
         const {data} = await dataFetch.delete(url)
         thunkAPI.dispatch(getAllJobs())
@@ -26,7 +25,7 @@ const deleteJobThunk = async (url, thunkAPI) => {
     }
 }
 
-const editJobThunk = async (url, payload, thunkAPI) => {
+const editJobThunk = async (url: string, payload: any, thunkAPI: any) => {
     const {jobId, job} = payload
     try {
         const {data} = await dataFetch.patch(`${url}${jobId}`, job)

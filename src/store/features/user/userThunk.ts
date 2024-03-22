@@ -4,28 +4,27 @@ import {clearAllJobsState} from '@/store/features/allJobs/allJobsSlice.ts'
 import {clearValues} from '@/store/features/job/jobSlice.ts'
 
 
-const registerUserThunk = async (url, payload, thunkAPI) => {
+const registerUserThunk = async (url: string, payload: any, thunkAPI: any) => {
     try {
         const {data} = await dataFetch.post(url, payload)
         return data
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data['msg'])
+        return thunkAPI.rejectWithValue("failed to register user")
     }
 
 }
 
-const loginUserThunk = async (url, payload, thunkAPI) => {
+const loginUserThunk = async (url: string, payload: any, thunkAPI: any) => {
     try {
         const {data} = await dataFetch.post(url, payload)
 
         return data
-    } catch (error: any) {
-        const {response: {data: {msg}}} = error
-        return thunkAPI.rejectWithValue(msg)
+    } catch (error) {
+        return thunkAPI.rejectWithValue("failed to login user")
     }
 }
 
-const updateUserThunk = async (url, payload, thunkAPI) => {
+const updateUserThunk = async (url: string, payload: any, thunkAPI: any) => {
     try {
         const {data} = await dataFetch.patch(url, payload)
 
@@ -36,7 +35,7 @@ const updateUserThunk = async (url, payload, thunkAPI) => {
 }
 
 // CLEAR STORE THUNK
-const clearStoreThunk = async (message, thunkAPI) => {
+const clearStoreThunk = async (message: any, thunkAPI: any) => {
     try {
         /* Clear Add jobs State */
         thunkAPI.dispatch(clearValues())
@@ -51,11 +50,11 @@ const clearStoreThunk = async (message, thunkAPI) => {
     }
 }
 
-const checkBadResponse = async (error, thunkAPI) => {
+const checkBadResponse = async (error: any, thunkAPI: any) => {
     const {response: {data: {msg}, status}} = error
     if (status === 401) {
         thunkAPI.dispatch(clearStore(""))
-        return thunkAPI.rejectWithValue('Unauthorized logging user out')
+        return thunkAPI.rejectWithValue('unauthorized logging user out')
     }
     return thunkAPI.rejectWithValue(msg)
 

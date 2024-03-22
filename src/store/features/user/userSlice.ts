@@ -12,19 +12,19 @@ const initialState = {
 
 // New User Thunk
 const registerUser = createAsyncThunk('user/registerUser',
-    async (userPayload, thunkAPI) => {
+    async (userPayload: any, thunkAPI) => {
         return registerUserThunk('/auth/v1/signup', userPayload, thunkAPI)
     })
 
 // Login User Thunk
 const loginUser = createAsyncThunk('user/loginUser',
-    async (userPayload, thunkAPI) => {
+    async (userPayload: any, thunkAPI) => {
         return loginUserThunk('/auth/v1/token?grant_type=password', userPayload, thunkAPI)
     })
 
 // Update User Thunk
 const updateUser = createAsyncThunk('user/updateUser',
-    async (userPayload: object, thunkAPI) => {
+    async (userPayload: any, thunkAPI) => {
         /* Get Token From Local State */
         return updateUserThunk('/auth/updateUser', userPayload, thunkAPI)
     })
@@ -78,9 +78,9 @@ const userSlice = createSlice({
                 state.isLoading = false
                 toast.success(`Hello New User`)
             })
-            .addCase(registerUser.rejected, (state, {payload}) => {
+            .addCase(registerUser.rejected, (state) => {
                 state.isLoading = false
-                toast.error(payload)
+                toast.error("failed to register user")
             })
             .addCase(loginUser.pending, (state) => {
                 state.isLoading = true
@@ -94,9 +94,9 @@ const userSlice = createSlice({
                 state.isSidebarOpen = true
                 toast.success(`Welcome Back User`)
             })
-            .addCase(loginUser.rejected, (state, {payload}) => {
+            .addCase(loginUser.rejected, (state) => {
                 state.isLoading = false
-                toast.error(payload)
+                toast.error("failed to login user")
             })
             .addCase(clearStore.rejected, () => {
                 toast.error('There was an error')

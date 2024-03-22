@@ -65,7 +65,7 @@ function AddJobPage() {
         if (!isEditing) {
             dispatch(handleChange({inputName: 'jobLocation', inputValue: user.location}))
         }
-    }, [])
+    }, [dispatch, isEditing, user.location])
 
     return (
         <Wrapper>
@@ -101,13 +101,11 @@ function AddJobPage() {
 
 
                 <div className="btn-container">
-
                     <button type="button"
                         className="btn btn-block clear-btn"
                         onClick={handleClear}>
                         Clear
                     </button>
-
                     <button type="button"
                         className="btn btn-block submit-btn"
                         onClick={handleSubmit}

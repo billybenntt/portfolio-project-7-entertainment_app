@@ -5,7 +5,6 @@ import {chartData} from '@/utils/data.placeholder.ts'
 
 function ChartsContainer() {
 
-
     const [barChart, setBarChart] = useState(true)
 
 

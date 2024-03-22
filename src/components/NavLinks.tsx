@@ -1,13 +1,10 @@
 import dataLinks from '@/utils/data.links.tsx'
 import {NavLink} from 'react-router-dom'
 
-function NavLinks(props) {
-
-    const {toggleSidebar} = props
-
+function NavLinks() {
 
     // NAV LINK CLASS HANDLER
-    const handleClass = (status) => {
+    const handleClass = (status: any) => {
         const {isActive} = status
         return isActive ? 'nav-link active' : 'nav-link'
     }
@@ -17,8 +14,7 @@ function NavLinks(props) {
         const {id, path, icon, text} = item
         return (
             <NavLink key={id}
-                to={path} className={handleClass}
-                onClick={toggleSidebar}>
+                to={path} className={handleClass}>
                 <span className="icon">{icon}</span>
                 {text}
             </NavLink>

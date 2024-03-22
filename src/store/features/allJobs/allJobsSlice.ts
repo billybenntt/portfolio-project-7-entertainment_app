@@ -3,7 +3,6 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {getAllJobsThunk} from './allJobsThunk.ts'
 import {AllJobsState} from '@/types/app.definitions.ts'
 
-
 const initialState: AllJobsState = {
     isLoading: false,
     jobs: [],
@@ -28,6 +27,7 @@ const initialState: AllJobsState = {
 
 const getAllJobs = createAsyncThunk('allJobs/getJobs',
     async (_, thunkAPI) => {
+
         return getAllJobsThunk('/rest/v1/jobs?select=*', thunkAPI)
     }
 )
