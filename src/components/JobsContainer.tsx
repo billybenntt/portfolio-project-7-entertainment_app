@@ -14,10 +14,6 @@ function JobsContainer() {
         jobs,
         page,
         totalJobs,
-        search,
-        searchStatus,
-        searchType,
-        sort,
     } = useAppSelector(store => store.allJobs)
 
     const hasJobs = jobs.length === 0
@@ -26,7 +22,7 @@ function JobsContainer() {
     useEffect(() => {
 
         dispatch(getAllJobs())
-    }, [page, search, searchStatus, sort, searchType, dispatch])
+    }, [page, dispatch])
 
     // LOADING RETURN
     if (isLoading) {
@@ -37,7 +33,7 @@ function JobsContainer() {
         )
     }
 
-    // NO JOBS  RETURN
+    // NO JOBS RETURN
     if (hasJobs) {
         return (
             <Wrapper>
@@ -62,7 +58,7 @@ function JobsContainer() {
                 {jobsList}
             </div>
             {/*{numOfPages > 1 && <Pagination/>}*/}
-            <Pagination  />
+            <Pagination/>
         </Wrapper>
     )
 }

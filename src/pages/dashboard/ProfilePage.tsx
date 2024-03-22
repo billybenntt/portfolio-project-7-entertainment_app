@@ -8,12 +8,12 @@ import {SubmitFormEvent, UpdateFormEvent} from '@/types/app.definitions.ts'
 
 function ProfilePage() {
 
-
     // GLOBAL STATE
-    const {isLoading, user} = useAppSelector(store => store.user)
     const dispatch = useAppDispatch()
+    const {isLoading, user} = useAppSelector(store => store.user)
+    const {name, email, lastName, location} = user
 
-    // COMPONENT STATE
+    // FALLBACK STATE
     const [userData, setUserData] = useState({
         name: user?.name || '',
         email: user?.email || '',
@@ -21,10 +21,7 @@ function ProfilePage() {
         location: user?.location || '',
     })
 
-    // DESTRUCTURE STATE
-    const {name, email, lastName, location} = userData
 
-    // EVENT HANDLER (INPUT)
     const handleChange = (e: UpdateFormEvent) => {
         const inputName = e.target.name
         const inputValue = e.target.value
@@ -34,23 +31,25 @@ function ProfilePage() {
     // EVENT HANDLER (SUBMIT FORM)
     const handleSubmit = (e: SubmitFormEvent) => {
         e.preventDefault()
+
+        
+
         if (!name || !email || !lastName || !location) {
             toast.error('Fill all the fields')
-
         }
-
         dispatch(updateUser(userData))
     }
+
 
     return (
         <Wrapper>
             <form className="form" onSubmit={handleSubmit}>
                 <h3>Profile</h3>
                 <div className="form-center">
-                    <FormRow type="text" name="name" value={name} handleChange={handleChange}/>
-                    <FormRow type="text" name="lastName" value={lastName} handleChange={handleChange} labelText="Last Name"/>
-                    <FormRow type="text" name="email" value={email} handleChange={handleChange}/>
-                    <FormRow type="text" name="location" value={location} handleChange={handleChange}/>
+                    <FormRow type="text" name="name" value={userData.name} handleChange={handleChange}/>
+                    <FormRow type="text" name="lastName" value={userData.lastName} handleChange={handleChange} labelText="Last Name"/>
+                    <FormRow type="text" name="email" value={userData.email} handleChange={handleChange}/>
+                    <FormRow type="text" name="location" value={userData.location} handleChange={handleChange}/>
                     <button className="btn" type="submit">
                         {isLoading ? 'Please Wait...' : 'Save Changes'}
                     </button>
