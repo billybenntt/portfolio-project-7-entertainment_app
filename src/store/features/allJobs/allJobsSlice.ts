@@ -27,7 +27,6 @@ const initialState: AllJobsState = {
 
 const getAllJobs = createAsyncThunk('allJobs/getJobs',
     async (_, thunkAPI) => {
-
         return getAllJobsThunk('/rest/v1/jobs?select=*', thunkAPI)
     }
 )

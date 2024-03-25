@@ -32,7 +32,7 @@ function ProfilePage() {
     const handleSubmit = (e: SubmitFormEvent) => {
         e.preventDefault()
 
-        
+
 
         if (!name || !email || !lastName || !location) {
             toast.error('Fill all the fields')
